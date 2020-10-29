@@ -73,7 +73,7 @@ public class UsuarioInsertTest {
  *
  * {
  *     "nome": "Gabriel Moreira",
- *     "cpf" : 10447257455,
+ *     "cpf" : ,
  *     "ativo" : true,
  *     "curso":[
  *         {
