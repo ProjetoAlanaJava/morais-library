@@ -3,6 +3,8 @@ package br.com.projetojava.morais.library.model;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,11 +31,11 @@ public class Usuario {
 
     private Boolean ativo;
 
-    @OneToMany(cascade = CascadeType.PERSIST, targetEntity = Curso.class)
+    @OneToMany
     @JoinColumn(name = "curso_id")
     private List<Curso> curso; // FK
 
-    @OneToOne(cascade = CascadeType.PERSIST, targetEntity = Departamento.class)
+    @OneToOne
     @JoinColumn(name = "departamento_id")
     private Departamento departamento; // FK
 
