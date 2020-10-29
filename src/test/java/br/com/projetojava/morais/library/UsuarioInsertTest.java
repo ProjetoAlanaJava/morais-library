@@ -71,26 +71,18 @@ public class UsuarioInsertTest {
  * EXEMPLO DE USUARIO A SER INSERIDO NO USUARIO
  *
  *
- * {
- *     "nome": "Gabriel Moreira",
- *     "cpf" : ,
- *     "ativo" : true,
- *     "curso":[
- *         {
- *             "nome" : "Sistema de Informação",
- *             "area" : "Tecnlogia",
- *             "tipo" : "Presencial"
- *         }
- *     ],
- *     "departamento" : {
- *         "nome" : "Departamento de Sistemas de Informação",
- *         "area" : "Tecnlogia"
- *     },
- *     "cargo" : "",
- *     "limiteLivros" : 10,
- *     "tipo" : "Aluno",
- *     "telefone" : "83999505050",
- *     "email" : "teste111@gmail.com"
- * }
+     {
+        "nome": "Gabriel Moreira",
+        "cpf" : 10115111111,
+        "ativo" : true,
+        "curso":[{ "id" : 1}],
+        "departamento" : { "id" : 1},
+        "cargo" : "Professor",
+        "limiteLivros" : 10,
+        "tipo" : "Aluno",
+        "telefone" : "83999505050",
+        "email" : "teste111@gmail.com"
+     }
+ *
  *
  */

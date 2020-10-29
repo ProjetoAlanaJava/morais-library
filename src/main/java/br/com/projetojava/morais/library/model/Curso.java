@@ -17,7 +17,6 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "curso_nome")
     private String nome;
 
     private String area;
