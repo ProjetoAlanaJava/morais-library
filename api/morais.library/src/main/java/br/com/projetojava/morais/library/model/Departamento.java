@@ -1,7 +1,6 @@
 package br.com.projetojava.morais.library.model;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
@@ -17,10 +16,8 @@ public class Departamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "departamento_nome")
     private String nome;
 
-    @Column(name = "departamento_area")
     private String area;
 
 }
