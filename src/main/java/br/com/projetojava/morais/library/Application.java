@@ -24,7 +24,7 @@ public class Application {
 		
 		String username = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
-		String dbUrl = "dbc:mysql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+		String dbUrl = "jdbc:mysql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
 
 		return DriverManager.getConnection(dbUrl, username, password);
 	}
