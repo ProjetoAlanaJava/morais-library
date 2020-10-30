@@ -68,9 +68,4 @@ MIT
 
 **Free Software!**
 
-[//]: 
- PROJETO UNIVERSITÁRIO DESENVOLVIDO POR IGOR FELIPE E GABRIEL MOREIRA.
- 
- GitHub:
- https://github.com/Lacenlot
- https://github.com/igorfelipes 
+PROJETO UNIVERSITÁRIO DESENVOLVIDO POR [Igor Felipe](https://github.com/igorfelipes) E [Gabriel Moreira](https://github.com/Lacenlot)
