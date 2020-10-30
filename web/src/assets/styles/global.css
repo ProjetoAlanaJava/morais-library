@@ -1,0 +1,27 @@
+:root{
+  font-size: 62.5%;
+
+  --color-background: #F0F0F7;
+  /* --color-background: #223a48; */
+  --color-primary: #294251;
+  --color-primary-light: #84a1b7;
+  --color-primary-dark: #0f212f;
+  --color-secundary: #ddcd9d;
+  --color-secundary-dark: #382d0d;
+  --color-input-background: #F8F8FC;
+  --color-line-in-white: #E6E6F0;
+  --color-link-menu: #FFFFFF;
+  --color-base: #FFFFFF;
+  --color-button-text: #000000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html, body, #root {
+  height: 100vh; /* Faz com que a página ocupe sempre a altura total da tela */
+}
