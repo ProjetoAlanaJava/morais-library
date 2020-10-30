@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: ${DATABASE_USERNAME}
-    username: ${DATABASE_PASSWORD}
-    password: ${DATABASE_URL}
+    url: "jdbc:mysql://" + ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
 
 
 
