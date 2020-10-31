@@ -1,0 +1,67 @@
+.page-header{
+  background-color: var(--color-primary-dark);
+  padding: 1.8rem 4.4rem;
+
+  display: grid;
+  grid-template-columns: 12rem 1fr auto ;
+  grid-template-areas: 
+          "logo navbar logout"
+ ;
+ 
+ align-items: center;
+}
+
+.page-header > a > img {
+  max-width: 20rem;
+}
+
+.page-header img {
+  max-width: 12rem;
+}
+
+.page-header .navbar {
+  margin-left: 8.4rem;
+}
+
+.page-header .navbar ul {
+  display: flex;
+  flex: wrap;
+}
+
+.page-header .navbar ul li {
+  list-style: none;
+  margin-left: 5.4rem;
+}
+
+.page-header .navbar a {
+  text-decoration: none;
+  font: 400 1.6rem Archivo;
+  margin-left: 2.4rem;
+  color: var(--color-link-menu);
+
+  transition: opacity .2s ;
+  transition: font-size .5s;
+  
+}
+
+.page-header .navbar a:hover{
+  opacity: .8;
+  font-size: 1.7rem;
+}
+
+.page-header .logout a:hover{
+  font-size: 1.7rem;
+}
+
+.logout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout span{
+  letter-spacing: .1rem;
+  font: 400 1.3rem Archivo;
+  margin-right: 1.4rem;
+  color: var(--color-link-menu)
+}
