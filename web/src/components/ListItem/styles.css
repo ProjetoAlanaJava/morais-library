@@ -1,0 +1,64 @@
+.list-item {
+  width: 50vw;
+  margin: 2.4rem 2rem;
+  padding: 2rem;
+  display: grid;
+  grid-template-areas: 
+    "avatar content options"
+    "avatar content options"
+  ;
+  border: 1px solid var(--color-line-in-white);
+  border-radius: 0.8rem;
+}
+
+.avatar {
+  grid-area: avatar;
+  margin: 0 2rem;
+  max-width: 9rem;
+  max-height: 9rem;
+  justify-self: center;
+}
+
+.avatar img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--color-line-in-white);
+}
+
+.options {
+  grid-area: options;
+  justify-self: flex-end;
+}
+
+
+.options a {
+  background-color: var(--color-primary-light);
+  margin: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 1s ;
+}
+
+.list-item .options a:hover{
+  background-color: var(--color-primary-dark)
+}
+
+
+.content {
+  grid-area: content;
+  align-self: center;
+}
+
+.content span{
+  margin-left: 1rem;
+}
+
+
+
+
+
