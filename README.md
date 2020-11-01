@@ -53,6 +53,21 @@ Maiores detalhes podem ser encontrados na documentação:      [spring-boot-docu
 
 ### INTERFACE 
 
+link: https://moraislibrary-frontend.herokuapp.com/
+
+Para o desenvolvimento front-end da aplicação foi escolhido a tecnologia React, para rodar localmente 
+é necessário fazer a instalação do [Node.js](https://nodejs.org/en/);
+
+Após a instalação, acesse o diretório da pasta e execute o comando para instalar as dependencias 
+do projeto e start a aplicação
+
+```
+$ cd web
+$ yarn 
+$ yarn start
+```
+
+
 ### TODOS
 * API
     - Desenvolver mais testes;
