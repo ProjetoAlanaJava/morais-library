@@ -1,10 +1,16 @@
 import React from 'react';
 
+import PageBody from '../../components/PageBody';
+
 function UsersList(){
   return (
-    <div className="container">
-      <h1>Book - Page</h1>
-    </div>
+    <PageBody 
+      title="Livros - Lista"
+      link="/livros/form"
+      isForm={false}
+    >
+      
+    </PageBody>
   )
 }
 
