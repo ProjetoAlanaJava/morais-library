@@ -19,7 +19,7 @@ public class Application {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("https://moraislibrary-frontend.herokuapp.com/")
+						.allowedOrigins("*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
 			}
 		};
