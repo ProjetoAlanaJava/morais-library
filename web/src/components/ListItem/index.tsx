@@ -16,15 +16,13 @@ import './styles.css';
 interface ListItemProps {
     avatar?: string;
     key: number;
-    titulo: string;
-    description: string;
     editLink: string;
     deleteLink: string;
     book?: Book ;
     user?: User ;
 }
 
-const ListItem: React.FC<ListItemProps> = ({ titulo, description, editLink, deleteLink, avatar, book, user}) =>{
+const ListItem: React.FC<ListItemProps> = ({ editLink, deleteLink, avatar, book, user }) =>{
 
     function editItem(){
         return console.log('Edit Link')
@@ -40,21 +38,30 @@ const ListItem: React.FC<ListItemProps> = ({ titulo, description, editLink, dele
     }
 
     return (
-        <section className="list-item">
+        <main className="list-item">
             { avatar?
                 <div className="avatar">
                     <img src={avatar} alt=""/>
                 </div> 
                 : null
             }
-            <div className="content">
-                <strong>
-                    Igor Felipe Sales
-                </strong>
-                <span> Curso: Sistemas de Informação</span>
-                <span>email: igor@igorsales.com.br</span>
-                <span>telefone: (99) 99999-9999</span>
-            </div>
+            <article className="content">
+                <header>
+                    <strong>{ user? user?.nome : 'Teste' }</strong>
+                    <br/>              
+                </header>
+                <div className="body-content">
+                    <strong>{ user? 'Curso:' : 'Editora:'}</strong>
+                    <span>{ user? user?.curso[0].nome : 'Teste' }</span>
+                    <br/>
+                    <strong>{ user? 'Email:' : 'ISBN:'}</strong>
+                    <span>{user? user?.email : 'Teste'}</span>
+                    <br/>
+                    <strong>{ user? 'Telefone:' : 'Quantidade:'}</strong>
+                    <span>{ user? user?.telefone : 'Teste'}</span>
+                </div>
+            </article>
+
             <div className="options">
                 <Link to={editLink}>
                     <img src={editIcon} alt="Editar item" onClick={editItem}/>
@@ -64,7 +71,7 @@ const ListItem: React.FC<ListItemProps> = ({ titulo, description, editLink, dele
                     <img src={deleteIcon} alt="Deletar item" onClick={deleteItem}/>
                 </Link>
             </div>
-        </section>
+        </main>
     )
 }
 
