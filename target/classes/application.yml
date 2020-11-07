@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: "jdbc:mysql://localhost:3306/teste_local_projeto?useSSL=false"
+    username: "manager"
+    password: "12345678"
+
