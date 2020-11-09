@@ -2,6 +2,7 @@ package br.com.projetojava.morais.library.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -26,6 +27,7 @@ public class RESTFilter implements Filter {
 
         log.info("Começando uma trasanção em : {}", req.getRequestURI());
         String token = req.getHeader("access_token");
+
         if(Objects.nonNull(token) && !token.isEmpty()) {
             chain.doFilter(request, response);
             log.info("Commitando uma trasanção em : {}", req.getRequestURI());
