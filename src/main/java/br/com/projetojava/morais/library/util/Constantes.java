@@ -1,13 +1,10 @@
 package br.com.projetojava.morais.library.util;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class Constantes {
 
     public static final String METODOS_PERMITIDOS = "GET, POST, PUT, DELETE";
 
-    public static final String HEADERS_PERMITIDOS = "Origin, Accept, X-Requestd-Wtih, Content-Type, Authorization";
+    public static final String HEADERS_PERMITIDOS = "Origin, Accept, X-Requestd-Wtih, Content-Type, Authorization, access_token";
 
     public static final String MAX_AGE = "3600";
 
