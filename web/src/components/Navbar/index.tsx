@@ -7,11 +7,13 @@ import logoutIcon from '../../assets/images/icons/logout.svg';
 import logoExtendIcon from '../../assets/images/icons/logo-extend.svg';
 
 import './styles.css';
+import { logout } from '../../services/auth';
 
 function Navbar(){
 
     const handleLogout = () => {
       console.log('LOGOUT');
+      logout()
     }
 
     return (

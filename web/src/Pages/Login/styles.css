@@ -1,0 +1,30 @@
+.login-body {
+  padding: 3rem 3.2rem; ;
+  background: var(--color-base);
+  width: 25vw;
+  border-radius: 0.8rem;
+  border: 1px solid var(--color-line-in-white);
+  font: 400 1.4rem Poppins;
+  color: var(--color-primary-dark);
+}
+
+.login-body fieldset {
+  border: 0;
+}
+
+.login-body fieldset legend {
+  font: 500 2rem Poppins;
+  color: var(--color-primary-dark);
+  margin-bottom: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--color-line-in-white);
+}
+
+.login-container {
+  padding: 2.4rem;
+  width: 20vw;
+}
