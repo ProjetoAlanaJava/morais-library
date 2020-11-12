@@ -4,4 +4,12 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 })
 
+api.interceptors.request.use(async config => {
+  const token = 'token';
+  if (token) {
+    config.headers.access_token = `Bearer ${token}`;
+  }
+  return config;
+});
+
 export default api;
