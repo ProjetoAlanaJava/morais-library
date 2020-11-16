@@ -1,34 +1,23 @@
 package br.com.projetojava.morais.library.model;
 
-import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.security.core.GrantedAuthority;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@DynamicInsert
-@DynamicUpdate
-@EqualsAndHashCode(of = { "id" })
-@ToString(of = {"id"})
-@Table(name = "logins")
 public class UserCredentials {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String username;
 
-    @Column(name = "username", unique = true)
-    private String userName;
-
-    @Column(name = "password")
-    private String passWord;
-
-    //GrantedAuthority
-    private String authority;
+    private String password;
 
 }
+/** Modelo de Requisição para fazer Login!
+    {
+        "username": "20191022024",
+        "password": "123456"
+    }
+
+**/

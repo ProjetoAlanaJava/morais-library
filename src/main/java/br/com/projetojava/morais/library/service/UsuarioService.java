@@ -2,7 +2,6 @@ package br.com.projetojava.morais.library.service;
 
 import br.com.projetojava.morais.library.model.Usuario;
 import br.com.projetojava.morais.library.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,22 +10,30 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository repository;
 
-   public Usuario save(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-   }
-
-    public void deleteById(Long id) {
-        usuarioRepository.deleteById(id);
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        repository = usuarioRepository;
     }
 
-    public List<Usuario> findAll() {
-       return usuarioRepository.findAll();
+    public Usuario save(Usuario usuario) {
+        return repository.save(usuario);
+    }
+
+    public Optional<Usuario> findByUserAndPass(String user, String password) {
+        return repository.findByMatriculaAndPassword(user, password);
     }
 
     public Optional<Usuario> findById(Long id) {
-        return usuarioRepository.findById(id);
+        return repository.findById(id);
     }
+
+    public List<Usuario> findAll() {
+        return repository.findAll();
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+
 }
