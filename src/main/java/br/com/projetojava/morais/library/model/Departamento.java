@@ -18,6 +18,12 @@ public class Departamento {
 
     private String nome;
 
-    private String area;
-
 }
+
+/** Request de departamentos
+ *      {
+ *          "nome": "Departamento de Psicologia"
+ *      }
+ *
+ */
+

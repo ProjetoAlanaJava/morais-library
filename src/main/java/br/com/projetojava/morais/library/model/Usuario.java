@@ -16,7 +16,6 @@ import java.util.List;
 @DynamicInsert
 @DynamicUpdate
 @EqualsAndHashCode(of = { "id" })
-@ToString
 @Table(name = "usuarios")
 public class Usuario {
 
@@ -24,24 +23,24 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private String matricula;
+
+    private String password;
+
+    private String authority;
+
     private String nome;
 
-    @Column(unique = true)
     private Long cpf;
 
     private Boolean ativo;
 
-    @OneToMany
-    @JoinColumn(name = "curso_id")
-    private List<Curso> curso; // FK
-
     @OneToOne
-    @JoinColumn(name = "departamento_id")
-    private Departamento departamento; // FK
+    @JoinColumn(name = "curso_id")
+    private Curso curso; // FK
 
     private String cargo;
-
-    private String tipo;
 
     @Column(nullable = false)
     private Integer limiteLivros;
@@ -49,5 +48,38 @@ public class Usuario {
     private String telefone;
 
     private  String email;
-
 }
+
+/**
+    Request para criar novo usuario!
+
+    {
+        "matricula" : "20191022024",
+        "password":  "123456",
+        "authority" : "usuario", --> Pode ser, usuario(Aluno ou Externo), funcionario, professor
+        "nome": "Gabriel Moreira de Oliveira",
+        "cpf": 12022014199,
+        "ativo": true,
+        "curso": {"id": 1},
+        [DEPRECIADO]"departamento": foi colocado diretamente no curso, não enviar mais
+        "cargo": null, --> Apenas para Professor ou Funcionario
+        [DEPRECIADO]"tipo": tipo foi substituido por authority, não enviar mais!
+        "limiteLivros": 10,
+        "telefone": "83999706080",
+        "email":"teste@gmail.com"
+    }
+        Modelo sem os campos depreciados
+        {
+         "matricula" : "20191022024",
+         "password":  "123456",
+         "authority" : "usuario",
+         "nome": "Gabriel Moreira de Oliveira",
+         "cpf": 12022014199,
+         "ativo": true,
+         "curso": {"id": 3},
+         "cargo": null,
+         "limiteLivros": 10,
+         "telefone": "83999706080",
+         "email":"teste@gmail.com"
+        }
+ **/
