@@ -2,7 +2,6 @@ package br.com.projetojava.morais.library.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;

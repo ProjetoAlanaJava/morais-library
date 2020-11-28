@@ -4,6 +4,7 @@ import br.com.projetojava.morais.library.model.ReservaEspaco;
 import br.com.projetojava.morais.library.repository.ReservaEspacoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,10 @@ public class ReservaEspacoService {
 
     public ReservaEspacoService(ReservaEspacoRepository reservaEspacoRepository) {
         repository = reservaEspacoRepository;
+    }
+
+    public ReservaEspaco findIfExist(Date data, Date horarioInicio, Date horarioFim) {
+        return repository.findByDataAndhorarioInicioReservaAndHorarioFimReserva(data, horarioInicio, horarioFim);
     }
 
     public ReservaEspaco save(ReservaEspaco reserva) {
