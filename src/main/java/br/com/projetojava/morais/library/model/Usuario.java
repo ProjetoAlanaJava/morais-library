@@ -56,7 +56,7 @@ public class Usuario {
     {
         "matricula" : "20191022024",
         "password":  "123456",
-        "authority" : "usuario", --> Pode ser, usuario(Aluno ou Externo), funcionario, professor
+        "authority" : "usuario", --> Pode ser, aluno, externo, funcionario, professor
         "nome": "Gabriel Moreira de Oliveira",
         "cpf": 12022014199,
         "ativo": true,

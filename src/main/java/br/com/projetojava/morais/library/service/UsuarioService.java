@@ -24,6 +24,10 @@ public class UsuarioService {
         return repository.findByMatriculaAndPassword(user, password);
     }
 
+    public Usuario findByMatricula(String matricula) {
+        return repository.findByMatricula(matricula);
+    }
+
     public Optional<Usuario> findById(Long id) {
         return repository.findById(id);
     }

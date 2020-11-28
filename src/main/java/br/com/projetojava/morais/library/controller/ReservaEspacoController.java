@@ -36,13 +36,20 @@ public class ReservaEspacoController {
     }
 
     @PostMapping
-    public ResponseEntity<ReservaEspaco> salvar(@RequestBody ReservaEspaco reserva) {
+    public ResponseEntity<?> salvar(@RequestBody ReservaEspaco reserva) {
 
         if(Objects.nonNull(reserva)) {
-            return ResponseEntity.ok().body(service.save(reserva));
+
+            ReservaEspaco reservaAchada = service.findIfExist(reserva.getData(), reserva.getHorarioInicioReserva(), reserva.getHorarioFimReserva());
+
+            if(Objects.nonNull(reservaAchada)) {
+                return ResponseEntity.badRequest().body("Já existe uma reserva nesse horário");
+            } else {
+                return ResponseEntity.ok().body(service.save(reserva));
+            }
         }
 
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Campos vazios na request!");
     }
 
     @PutMapping(path = {"/{id}"})

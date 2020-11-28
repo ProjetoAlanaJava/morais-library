@@ -17,4 +17,17 @@ public class Constantes {
 
     public static final String VAZIO = "";
 
+    public static final Long TEMPO_DEVOLUCAO_ALUNO = 2L;
+
+    public static final Long TEMPO_DEVOLUCAO_EXTERNO = 1L;
+
+    public static final Long TEMPO_DEVOLUCAO_PROFESSOR = 3L;
+
+    public static final String USUARIO_NAO_ACHADO = "Usuário com o ID informado não achado!";
+
+    public static final String FUNCIONARIO_NAO_ACHADO = "Funcinário com o ID informado não achado!";
+
+    public static final String RESERVA_LIVRO_EXISE = "Esse livro já está reservado por outro usuário!";
+
+    public static final String EMPRESTIMO_NAO_ENCONTRADO = "Esse emprestimo não foi encontrado!";
 }
