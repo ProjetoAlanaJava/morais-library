@@ -8,7 +8,7 @@ import editIcon from '../../assets/images/icons/edit-white.svg';
 // import api from '../../services/api';
 
 import { Book } from '../../utils/@types/Books';
-import { User } from '../../utils/@types/Users';
+import { User } from '../../store/modules/users/types';
 
 
 import './styles.css';
@@ -52,7 +52,7 @@ const ListItem: React.FC<ListItemProps> = ({ editLink, deleteLink, avatar, book,
                 </header>
                 <div className="body-content">
                     <strong>{ user? 'Curso:' : 'Editora:'}</strong>
-                    <span>{ user? user?.curso[0].nome : 'Teste' }</span>
+                    <span>{ user? user?.curso.nome : 'Teste' }</span>
                     <br/>
                     <strong>{ user? 'Email:' : 'ISBN:'}</strong>
                     <span>{user? user?.email : 'Teste'}</span>

@@ -7,7 +7,7 @@ import PageBody from '../../components/PageBody';
 import { ApplicationState } from '../../store';
 import { loadUsersRequest } from '../../store/modules/users/actions';
 
-import { User } from '../../utils/@types/Users';
+import { User } from '../../store/modules/users/types';
 
 import avatar from '../../assets/images/avatar.png';
 

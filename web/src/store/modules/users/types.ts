@@ -13,7 +13,7 @@ export interface User{
   nome: string;
   cpf: string;
   ativo: boolean;
-  curso: Curso [];
+  curso: Curso;
   departamento: Departamento;
   tipo: string;
   limiteLivros: number;
