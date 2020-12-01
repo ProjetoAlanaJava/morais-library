@@ -7,9 +7,6 @@ import editIcon from '../../assets/images/icons/edit-white.svg';
 
 // import api from '../../services/api';
 
-import { Book } from '../../utils/@types/Books';
-import { User } from '../../store/modules/users/types';
-
 
 import './styles.css';
 
@@ -18,11 +15,22 @@ interface ListItemProps {
     key: number;
     editLink: string;
     deleteLink: string;
-    book?: Book ;
-    user?: User ;
+    // book?: Book ;
+    // user?: User ;
+    header: string;
+    description_one_value: string;
+    description_one_title: string;
+    description_two_value: string;
+    description_two_title: string;
+    additional_information_title: string
+    additional_information_value: any;
 }
 
-const ListItem: React.FC<ListItemProps> = ({ editLink, deleteLink, avatar, book, user }) =>{
+const ListItem: React.FC<ListItemProps> = (
+    {   editLink, deleteLink, avatar, description_one_value, description_one_title, 
+        description_two_value, description_two_title, additional_information_value, 
+        additional_information_title, header
+    }) =>{
 
     function editItem(){
         return console.log('Edit Link')
@@ -47,18 +55,18 @@ const ListItem: React.FC<ListItemProps> = ({ editLink, deleteLink, avatar, book,
             }
             <article className="content">
                 <header>
-                    <strong>{ user? user?.nome : 'Teste' }</strong>
+                    <strong>{ header }</strong>
                     <br/>              
                 </header>
                 <div className="body-content">
-                    <strong>{ user? 'Curso:' : 'Editora:'}</strong>
-                    <span>{ user? user?.curso.nome : 'Teste' }</span>
+                    <strong>{ description_one_title}</strong>
+                    <span>{ description_one_value }</span>
                     <br/>
-                    <strong>{ user? 'Email:' : 'ISBN:'}</strong>
-                    <span>{user? user?.email : 'Teste'}</span>
+                    <strong>{ description_two_title}</strong>
+                    <span>{description_two_value}</span>
                     <br/>
-                    <strong>{ user? 'Telefone:' : 'Quantidade:'}</strong>
-                    <span>{ user? user?.telefone : 'Teste'}</span>
+                    <strong>{ additional_information_title}</strong>
+                    <span>{ additional_information_value}</span>
                 </div>
             </article>
 
