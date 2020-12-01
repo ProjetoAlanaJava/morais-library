@@ -22,7 +22,7 @@ function UsersList(){
 
   useEffect(() => {
     dispatch(loadUsersRequest())
-}, [dispatch]);
+  }, [dispatch]);
 
 
   return (
@@ -39,7 +39,13 @@ function UsersList(){
           <ListItem 
             key={user.id}
             avatar={avatar}
-            user={user} 
+            header={user.nome}
+            description_one_title="Curso"
+            description_one_value={user.curso.nome}
+            description_two_title="Email"
+            description_two_value={user.email}
+            additional_information_title="Telefone"
+            additional_information_value={user.telefone}
             editLink="/users/form"
             deleteLink="/users"
           />
