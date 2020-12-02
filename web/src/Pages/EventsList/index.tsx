@@ -35,6 +35,7 @@ function EventsList(){
         return       <div className="events-list">
         <ListItem 
             key={event.id}
+            type="event"
             avatar={bookIcon}
             header={event.title}
             description_one_title="Data"
