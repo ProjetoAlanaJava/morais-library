@@ -18,8 +18,8 @@ interface ListItemProps {
     // book?: Book ;
     // user?: User ;
     header: string;
-    description_one_value: string;
-    description_one_title: string;
+    description_one_value: string | Date | any;
+    description_one_title: string; 
     description_two_value: string;
     description_two_title: string;
     additional_information_title: string
