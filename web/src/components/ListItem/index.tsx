@@ -1,6 +1,7 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
+
+import { showUser } from '../../store/modules/users/actions';
 
 import deleteIcon from '../../assets/images/icons/delete-white.svg';
 import editIcon from '../../assets/images/icons/edit-white.svg';
@@ -9,14 +10,15 @@ import editIcon from '../../assets/images/icons/edit-white.svg';
 
 
 import './styles.css';
+import { User } from '../../store/modules/users/types';
 
 interface ListItemProps {
     avatar?: string;
     key: number;
     editLink: string;
     deleteLink: string;
-    // book?: Book ;
-    // user?: User ;
+    user?: User ;
+    type: string,
     header: string;
     description_one_value: string | Date | any;
     description_one_title: string; 
@@ -29,11 +31,15 @@ interface ListItemProps {
 const ListItem: React.FC<ListItemProps> = (
     {   editLink, deleteLink, avatar, description_one_value, description_one_title, 
         description_two_value, description_two_title, additional_information_value, 
-        additional_information_title, header
+        additional_information_title, header, type, user
     }) =>{
 
     function editItem(){
-        return console.log('Edit Link')
+
+        if(user){
+            return console.log('EDIT - USUARIO', user)
+        }
+        return console.log('Edit Link generic')
     }
 
     function deleteItem(){
