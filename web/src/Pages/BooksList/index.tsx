@@ -12,7 +12,7 @@ import { Book } from '../../store/modules/books/types';
 
 import './styles.css';
 
-function UsersList(){
+function BooksList(){
 
   const dispatch = useDispatch()
 
@@ -53,4 +53,4 @@ function UsersList(){
   )
 }
 
-export default UsersList;
+export default BooksList;
