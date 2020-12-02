@@ -9,14 +9,17 @@ export enum UsersTypes {
 
 
 export interface User{
+  matricula: string,
   id: number;
   nome: string;
   cpf: string;
   ativo: boolean;
   curso: Curso;
-  departamento: Departamento;
+  authority: number
+  cargo: string
+  // departamento: Departamento;
   tipo: string;
-  limiteLivros: number;
+  // limiteLivros: number;
   telefone?: string;
   email: string;
 }
@@ -38,7 +41,7 @@ export interface Departamento {
 export interface UsersState {
   readonly data: User[];
   readonly isEdit: boolean;
-  // readonly formData: User | undefined;
+  readonly formData: User | undefined;
   readonly loading: boolean;
   readonly error: boolean;
 }
