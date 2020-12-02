@@ -6,7 +6,7 @@ import api from '../../../services/api';
 
 export function* loadUsersSaga(){
   try{
-    const companies = yield call( api.get, 'usuarios/');
+    const companies = yield call( api.get, 'auth/usuarios/');
     
     yield put(loadUsers(companies.data))
   }catch(err) {
