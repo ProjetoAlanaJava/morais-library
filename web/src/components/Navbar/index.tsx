@@ -33,6 +33,9 @@ function Navbar(){
                         <Link to="/events">Eventos</Link>
                     </li>
                     <li className="menu-item">
+                        <Link to="/spaces">Espaços</Link>
+                    </li>
+                    <li className="menu-item">
                         <Link to="/settings">Configurações</Link>
                     </li>
                 </ul>
