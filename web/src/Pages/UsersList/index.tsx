@@ -28,7 +28,7 @@ function UsersList(){
   return (
     <PageBody 
       title="Usuários - Lista"
-      link="/usuarios/form"
+      link="/users/form"
       isForm={false}
     >
       
@@ -38,6 +38,8 @@ function UsersList(){
         return(
           <ListItem 
             key={user.id}
+            type="user"
+            user={user}
             avatar={avatar}
             header={user.nome}
             description_one_title="Curso"

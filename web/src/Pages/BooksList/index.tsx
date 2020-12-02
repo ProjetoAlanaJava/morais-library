@@ -34,6 +34,7 @@ function BooksList(){
         return       <div className="book-list">
         <ListItem 
             key={book.id}
+            type="book"
             avatar={bookIcon}
             header={book.titulo}
             description_one_title="Editora"
