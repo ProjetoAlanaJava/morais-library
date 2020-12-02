@@ -42,7 +42,16 @@ public class FichaCatalografica {
 
     private Integer numPaginas;
 
+    private String status;
+
 }
+
+/**
+ *  Não enviar na request, mas serve para filtrar na hora de gerar e solicitar!@!!!
+ * "status:" solicitada, para quando o usuario solicitar a ficha catalografica, mas ainda não foi gerada!!
+ *                 ou produizada, quando a ficha catalografica já foi gerada pelo funcionário!!!
+ */
+
 /** Modelo para request de Ficha Catalografica
     {
             "titulo" : "Desenvolvimento ambiental do pantanal Brasileiro",

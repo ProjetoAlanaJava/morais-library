@@ -39,6 +39,14 @@ public class EmprestimoService {
         repository.deleteById(id);
     }
 
+    public Integer countAllEmprestimos() {
+        return repository.countById();
+    }
+
+    public Integer countByDataDevolucao(String dataDevolucao) {
+        return repository.countByDataDevolucao(dataDevolucao);
+    }
+
     public boolean verificarValido(String matriculaUsuario, String matriculaReserva, String dataMaximaReserva){
 
         boolean matriculaIguais = matriculaUsuario.equals(matriculaReserva);

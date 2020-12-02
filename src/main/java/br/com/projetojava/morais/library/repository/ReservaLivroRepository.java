@@ -14,4 +14,11 @@ public interface ReservaLivroRepository extends JpaRepository<ReservaLivro, Long
 
     @Query(value = "SELECT * FROM reserva_livro WHERE usuario_id = ?", nativeQuery = true)
     List<ReservaLivro> findByUsuario(Long id);
+
+    @Query(value = "SELECT COUNT(*) FROM reserva_livro", nativeQuery = true)
+    Integer countAllById();
+
+    @Query(value = "SELECT COUNT(*) FROM reserva_livro WHERE data_maxima_emprestimo = ? ", nativeQuery = true)
+    Integer countByDataMaximaEmprestimo(String dataMaximoEmprestimo);
+
 }

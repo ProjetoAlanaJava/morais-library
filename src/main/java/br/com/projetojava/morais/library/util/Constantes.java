@@ -30,4 +30,15 @@ public class Constantes {
     public static final String RESERVA_LIVRO_EXISE = "Esse livro já está reservado por outro usuário!";
 
     public static final String EMPRESTIMO_NAO_ENCONTRADO = "Esse emprestimo não foi encontrado!";
+
+    public static final String MULTA_NAO_ENCONTRADA = "Essa multa não foi encontrada!";
+
+    public static final String MULTA_OK = "Paga";
+
+    public static final String MULTA_PENDENTE = "Pendente";
+
+    public static final String FICHA_STATUS_SOLICITACAO = "solicitada";
+
+    public static final String FICHA_STATUS_GERADA = "gerada";
+
 }

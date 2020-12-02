@@ -20,6 +20,18 @@ public class EventoService {
         return repository.findAll();
     }
 
+    public Integer countAll() {
+        return repository.countById();
+    }
+
+    public Integer countByData(String dataEvento) {
+        return repository.countByDate(dataEvento);
+    }
+
+    public Integer countByStatus(String status) {
+        return repository.countByStatus(status);
+    }
+
     public Optional<Evento> findById(Long id) {
         return repository.findById(id);
     }
