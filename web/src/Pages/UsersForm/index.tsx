@@ -52,15 +52,17 @@ function UserForm(){
       try{
         formRef.current?.setErrors({});
 
-        // const schemaDoc = Yup.object().shape({        
-        //     apelido: Yup.string().required('O apelido é obrigatório'),
-        //     conteudo: Yup.string().required('O conteúdo é obrigatório'),
-        //     destino: Yup.string().required('O destino é obrigatório'),
-        //   })
+        const schemaDoc = Yup.object().shape({        
+            matricula: Yup.string().required('O preenchimento da matrícula é obrigatório'),
+            nome: Yup.string().required('O preenchimento do nome é obrigatório'),
+            cpf: Yup.string().required('O preenchimento do cpf é obrigatório'),
+            email: Yup.string().required('O preenchimento do Email é obrigatório'),
+            telefone: Yup.string().required('O preenchimento do telefone é obrigatório'),
+          })
   
-        // await schemaDoc.validate(data, {
-        //   abortEarly: false,
-        // })
+        await schemaDoc.validate(data, {
+          abortEarly: false,
+        })
 
         console.log('IS_EDIT', users.isEdit)
 
