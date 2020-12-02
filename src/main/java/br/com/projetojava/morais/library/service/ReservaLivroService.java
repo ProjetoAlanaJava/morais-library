@@ -16,6 +16,15 @@ public class ReservaLivroService {
     public ReservaLivroService(ReservaLivroRepository reservaLivroRepository) {
         this.repository =  reservaLivroRepository;
     }
+
+    public Integer countALl() {
+        return repository.countAllById();
+    }
+
+    public Integer countALlByData(String dataEmprestimo) {
+        return repository.countByDataMaximaEmprestimo(dataEmprestimo);
+    }
+
     public List<ReservaLivro> findByUsuario(Long usuarioId) {
         return repository.findByUsuario(usuarioId);
     }

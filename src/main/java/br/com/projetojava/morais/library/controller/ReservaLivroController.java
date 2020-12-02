@@ -1,6 +1,6 @@
 package br.com.projetojava.morais.library.controller;
 
-import br.com.projetojava.morais.library.model.Emprestimo;
+
 import br.com.projetojava.morais.library.model.ReservaLivro;
 import br.com.projetojava.morais.library.service.ReservaLivroService;
 import br.com.projetojava.morais.library.util.Constantes;
@@ -21,8 +21,6 @@ public class ReservaLivroController {
     public ReservaLivroController(ReservaLivroService reservaLivroService) {
         this.service = reservaLivroService;
     }
-
-    /* Achar todas as Reservas por id de Usuario */
 
     /**
      * @param id -> fazer a request com o id do usuario para retornar todos as reservas de livro que ele possui!!!!!

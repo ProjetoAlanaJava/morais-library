@@ -21,6 +21,14 @@ public class ReservaEspacoService {
         return repository.findByDataAndhorarioInicioReservaAndHorarioFimReserva(data, horarioInicio, horarioFim);
     }
 
+    public Integer countALl() {
+        return repository.countAllById();
+    }
+
+    public Integer countByData(String dataReserva) {
+        return repository.countByData(dataReserva);
+    }
+
     public ReservaEspaco save(ReservaEspaco reserva) {
         return repository.save(reserva);
     }

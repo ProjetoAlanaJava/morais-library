@@ -1,10 +1,12 @@
 package br.com.projetojava.morais.library.controller;
 
 import br.com.projetojava.morais.library.model.Emprestimo;
+import br.com.projetojava.morais.library.model.Multa;
 import br.com.projetojava.morais.library.model.ReservaLivro;
 import br.com.projetojava.morais.library.model.Usuario;
 import br.com.projetojava.morais.library.model.books.Livro;
 import br.com.projetojava.morais.library.service.EmprestimoService;
+import br.com.projetojava.morais.library.service.MultaService;
 import br.com.projetojava.morais.library.service.ReservaLivroService;
 import br.com.projetojava.morais.library.service.UsuarioService;
 import br.com.projetojava.morais.library.service.books.LivroService;
@@ -25,12 +27,14 @@ public class EmprestimoController {
     UsuarioService userSerivce;
     LivroService livroService;
     ReservaLivroService reservaLivroService;
+    MultaService multaService;
 
-    public EmprestimoController(EmprestimoService emprestimoService, UsuarioService usuarioService, LivroService livroServico, ReservaLivroService reservaLivroServico) {
+    public EmprestimoController(EmprestimoService emprestimoService, UsuarioService usuarioService, LivroService livroServico, ReservaLivroService reservaLivroServico, MultaService multaServico) {
         service = emprestimoService;
         userSerivce = usuarioService;
         livroService = livroServico;
         reservaLivroService = reservaLivroServico;
+        multaService = multaServico;
     }
 
     /**
@@ -104,19 +108,19 @@ public class EmprestimoController {
                 }
 
                 if(userReq.getAuthority().equals("aluno")) {
-                    emprestimo.setDataDevolução(currentData.getDevolucaoData(Constantes.TEMPO_DEVOLUCAO_ALUNO));
+                    emprestimo.setDataDevolucao(currentData.getDevolucaoData(Constantes.TEMPO_DEVOLUCAO_ALUNO));
                     service.save(emprestimo);
-                    return ResponseEntity.ok().body(emprestimo.getDataDevolução());
+                    return ResponseEntity.ok().body(emprestimo.getDataDevolucao());
 
                 } else if(userReq.getAuthority().equals("professor")) {
-                    emprestimo.setDataDevolução(currentData.getDevolucaoData(Constantes.TEMPO_DEVOLUCAO_PROFESSOR));
+                    emprestimo.setDataDevolucao(currentData.getDevolucaoData(Constantes.TEMPO_DEVOLUCAO_PROFESSOR));
                     service.save(emprestimo);
-                    return ResponseEntity.ok().body(emprestimo.getDataDevolução());
+                    return ResponseEntity.ok().body(emprestimo.getDataDevolucao());
 
                 } else if(userReq.getAuthority().equals("externo")) {
-                    emprestimo.setDataDevolução(currentData.getDevolucaoData(Constantes.TEMPO_DEVOLUCAO_EXTERNO));
+                    emprestimo.setDataDevolucao(currentData.getDevolucaoData(Constantes.TEMPO_DEVOLUCAO_EXTERNO));
                     service.save(emprestimo);
-                    return ResponseEntity.ok().body(emprestimo.getDataDevolução());
+                    return ResponseEntity.ok().body(emprestimo.getDataDevolucao());
                 }
             } else {
                 return  ResponseEntity.badRequest().body("O livro já está reservado!");
@@ -134,11 +138,11 @@ public class EmprestimoController {
     @PutMapping(value = {"/renovar/{id}"})
     public ResponseEntity<?> renovarEmprestimo(@PathVariable("id") long id){
 
-        Emprestimo emprestimoAtualizar = service.findById(id);
-        Exceptions.checkAndThrow(Objects.isNull(emprestimoAtualizar), Constantes.EMPRESTIMO_NAO_ENCONTRADO);
-        GetData currentData = new GetData();
-
         if(id > 0) {
+
+            Emprestimo emprestimoAtualizar = service.findById(id);
+            Exceptions.checkAndThrow(Objects.isNull(emprestimoAtualizar), Constantes.EMPRESTIMO_NAO_ENCONTRADO);
+            GetData currentData = new GetData();
 
             if(emprestimoAtualizar.getRenovacoes() >= 3 ) {
                 return ResponseEntity.badRequest().body("Já atingiu o máximo de renovações!");
@@ -146,19 +150,19 @@ public class EmprestimoController {
 
                 String novaDev;
                 if(emprestimoAtualizar.getUsuario().getAuthority().equals("aluno")) {
-                    novaDev = currentData.novaDataDevolucao(emprestimoAtualizar.getDataDevolução(), Constantes.TEMPO_DEVOLUCAO_ALUNO);
-                    emprestimoAtualizar.setDataDevolução(novaDev);
+                    novaDev = currentData.novaDataDevolucao(emprestimoAtualizar.getDataDevolucao(), Constantes.TEMPO_DEVOLUCAO_ALUNO);
+                    emprestimoAtualizar.setDataDevolucao(novaDev);
                 } else if(emprestimoAtualizar.getUsuario().getAuthority().equals("professor")) {
-                    novaDev = currentData.novaDataDevolucao(emprestimoAtualizar.getDataDevolução(), Constantes.TEMPO_DEVOLUCAO_PROFESSOR);
-                    emprestimoAtualizar.setDataDevolução(novaDev);
+                    novaDev = currentData.novaDataDevolucao(emprestimoAtualizar.getDataDevolucao(), Constantes.TEMPO_DEVOLUCAO_PROFESSOR);
+                    emprestimoAtualizar.setDataDevolucao(novaDev);
                 } else {
-                    novaDev = currentData.novaDataDevolucao(emprestimoAtualizar.getDataDevolução(), Constantes.TEMPO_DEVOLUCAO_EXTERNO);
-                    emprestimoAtualizar.setDataDevolução(novaDev);
+                    novaDev = currentData.novaDataDevolucao(emprestimoAtualizar.getDataDevolucao(), Constantes.TEMPO_DEVOLUCAO_EXTERNO);
+                    emprestimoAtualizar.setDataDevolucao(novaDev);
                 }
 
                 emprestimoAtualizar.setRenovacoes(emprestimoAtualizar.getRenovacoes() + 1 );
                 service.save(emprestimoAtualizar);
-                return ResponseEntity.ok().body(emprestimoAtualizar.getDataDevolução());
+                return ResponseEntity.ok().body(emprestimoAtualizar.getDataDevolucao());
             }
         }
         return ResponseEntity.badRequest().build();
@@ -168,19 +172,56 @@ public class EmprestimoController {
      *
      * @param id -> ID do emprestimo a ser deletado!!
      * @return 200 - Se ele conseguir deletar emprestimo
-     * Vão haver outras responses, quando a multa for implementada!!!
+     * 200 - Com a multa gerada pelo emprestimo, se for o caso
+     * 200 - Se a multa não foi paga ainda, um aviso que a multa não foi paga
      * 402 - Se o id não for válido
      */
     @DeleteMapping(value = {"/{id}"})
     public ResponseEntity<?> realizarDevolucao(@PathVariable long id) {
 
         if(id > 0) {
+
             Emprestimo devolucao = service.findById(id);
-            boolean devolucaoAtrasada = service.verificarDataDevolucao(devolucao.getDataDevolução());
+            Exceptions.checkAndThrow(Objects.isNull(devolucao), Constantes.EMPRESTIMO_NAO_ENCONTRADO);
+            boolean devolucaoAtrasada = service.verificarDataDevolucao(devolucao.getDataDevolucao());
 
             if(devolucaoAtrasada) {
-                // Criar classe de multa e fazer toda a regra para criar a multa caso esteja atrasado
-                return ResponseEntity.ok().body("Devolução está atrasada, vai gerar multa!!!!!");
+
+                Multa acharMulta = multaService.findByEmprestimo(id);
+                if(Objects.nonNull(acharMulta)) {
+
+                    if(acharMulta.getSituacao().equals(Constantes.MULTA_OK)) {
+                        multaService.deleteById(acharMulta.getId());
+                        service.delete(id);
+                        return ResponseEntity.ok().body("Devolução realizada com sucesso!");
+                    }
+
+                    return ResponseEntity.ok().body("Para realizar a devolução primeiro é preciso realizar o pagamento da multa!");
+                } else {
+
+                    Multa novaMulta = new Multa();
+                    novaMulta.setEmprestimo(devolucao);
+                    novaMulta.setSituacao(Constantes.MULTA_PENDENTE);
+                    int diasAtrasados = multaService.calcularValorMulta(devolucao.getDataDevolucao());
+                    double valorNaoFormatado;
+
+                    /*  Valor por atraso para todos R$0,50!!!
+                        Multa = DiasAtrasados * 0,50
+                        Apenas professor recebe desconto na multa, que no caso é de 50%
+
+                    */
+
+                    if(devolucao.getUsuario().getAuthority().equals("professor")) {
+                        valorNaoFormatado = (diasAtrasados * 0.50) / 2;
+                        novaMulta.setValor(Double.toString(valorNaoFormatado));
+                    } else {
+                        valorNaoFormatado = diasAtrasados * 0.50;
+                        novaMulta.setValor(Double.toString(valorNaoFormatado));
+                    }
+
+                    return ResponseEntity.ok().body("Multa a ser paga gerada no valor de R$" + novaMulta.getValor());
+                }
+
             } else {
                 service.delete(id);
                 return ResponseEntity.ok().body("Devolução realizada com sucesso!");

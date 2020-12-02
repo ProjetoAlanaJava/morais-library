@@ -14,4 +14,10 @@ public interface ReservaEspacoRepository extends JpaRepository<ReservaEspaco, Lo
     @Query(value = "SELECT * FROM reserva_espaco where data = ? AND horario_inicio_reserva = ? AND horario_fim_reserva = ?", nativeQuery = true)
     ReservaEspaco findByDataAndhorarioInicioReservaAndHorarioFimReserva(Date data, Date horarioInicioReserva, Date horarioFimReserva);
 
+    @Query(value = "SELECT COUNT(*) FROM reserva_espaco", nativeQuery = true)
+    Integer countAllById();
+
+    @Query(value = "SELECT COUNT(*) FROM reserva_espaco WHERE `data` = ? ", nativeQuery = true)
+    Integer countByData(String dataMaximoEmprestimo);
+
 }

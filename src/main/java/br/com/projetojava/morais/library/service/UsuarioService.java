@@ -24,6 +24,14 @@ public class UsuarioService {
         return repository.findByMatriculaAndPassword(user, password);
     }
 
+    public Integer countAllUsers() {
+        return repository.countByAtivo();
+    }
+
+    public Integer countAllUsersByAutority(String autoridade) {
+        return repository.countAllByAuthority(autoridade);
+    }
+
     public Usuario findByMatricula(String matricula) {
         return repository.findByMatricula(matricula);
     }

@@ -38,8 +38,18 @@ public class AuthController {
         Usuario user;
 
         if(!Objects.isNull(usuario)) {
+
+            usuario.setAtivo(true);
+            if(usuario.getAuthority().equals("aluno")) {
+                usuario.setLimiteLivros(10);
+            } else if(usuario.getAuthority().equals("professor")) {
+                usuario.setLimiteLivros(15);
+            } else {
+                usuario.setLimiteLivros(5);
+            }
+
             user = service.save(usuario);
-            if(!Objects.isNull(user)) {
+            if(Objects.nonNull(user)) {
                 return ResponseEntity.ok().body("Usuário criado com sucesso!");
             } else {
                 return ResponseEntity.badRequest().body("Erro ao criar o usuário!");

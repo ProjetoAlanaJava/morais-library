@@ -52,33 +52,16 @@ public class Usuario {
 
 /**
     Request para criar novo usuario!
-
-    {
-        "matricula" : "20191022024",
-        "password":  "123456",
-        "authority" : "usuario", --> Pode ser, aluno, externo, funcionario, professor
-        "nome": "Gabriel Moreira de Oliveira",
-        "cpf": 12022014199,
-        "ativo": true,
-        "curso": {"id": 1},
-        [DEPRECIADO]"departamento": foi colocado diretamente no curso, não enviar mais
-        "cargo": null, --> Apenas para Professor ou Funcionario
-        [DEPRECIADO]"tipo": tipo foi substituido por authority, não enviar mais!
-        "limiteLivros": 10,
-        "telefone": "83999706080",
-        "email":"teste@gmail.com"
-    }
-        Modelo sem os campos depreciados
         {
          "matricula" : "20191022024",
          "password":  "123456",
-         "authority" : "usuario",
+         "authority" : "usuario", ---> usuario, externo, professor ou funcionario
          "nome": "Gabriel Moreira de Oliveira",
          "cpf": 12022014199,
-         "ativo": true,
+         [Depreciado]"ativo": true, ---> Não enviar mais, setado no AuthController /signup
          "curso": {"id": 3},
-         "cargo": null,
-         "limiteLivros": 10,
+         "cargo": null, ---> Enviar cargo caso seja funcionario, Ex: Bibliotecario
+         [Depreciado]"limiteLivros": 10, ---> Não enviar, setado no AuthController /signup
          "telefone": "83999706080",
          "email":"teste@gmail.com"
         }

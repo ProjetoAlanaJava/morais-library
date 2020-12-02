@@ -45,7 +45,7 @@ public class Emprestimo {
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy", timezone = "Brazil/East")
     @NotNull
-    String dataDevolução;
+    String dataDevolucao;
 
     @Column(columnDefinition = "INT DEFAULT 0")
     Integer renovacoes;
