@@ -30,6 +30,9 @@ function Navbar(){
                         <Link to="/users">Usuários</Link>
                     </li>
                     <li className="menu-item">
+                        <Link to="/events">Eventos</Link>
+                    </li>
+                    <li className="menu-item">
                         <Link to="/settings">Configurações</Link>
                     </li>
                 </ul>
