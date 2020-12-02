@@ -7,6 +7,7 @@ import BooksList from './Pages/BooksList';
 import Login from './Pages/Login';
 import EventList from './Pages/EventsList';
 import SpacesList from './Pages/SpacesList';
+import UserForm from './Pages/UsersForm';
 
 import { isAuthenticated } from './services/auth';
 
@@ -21,6 +22,7 @@ function Routes(){
       <Route path="/login" component={Login}/>
       <PrivateRoute path="/books" exact component={ BooksList}/>
       <PrivateRoute  path="/users" exact component={ UsersList }/>
+      <PrivateRoute  path="/users/form" exact component={ UserForm}/>
       <PrivateRoute  path="/events" exact component={ EventList }/>
       <PrivateRoute  path="/spaces" exact component={ SpacesList }/>
       <Route  path="*" component={() => <h1>Page not found</h1>} />
