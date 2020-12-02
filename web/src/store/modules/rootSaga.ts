@@ -6,6 +6,8 @@ import { BooksTypes } from './books/types';
 import { loadBooksSaga } from './books/saga';
 import { EventsTypes } from './events/types';
 import { loadEventsSaga } from './events/saga';
+import { SpacesTypes } from './spaces/types';
+import { loadSpacesSaga } from './spaces/saga';
 
 
 export default function* rootSaga(){
@@ -13,5 +15,6 @@ export default function* rootSaga(){
     takeLatest(UsersTypes.LOAD_USERS_REQUEST, loadUsersSaga ),
     takeLatest(BooksTypes.LOAD_BOOKS_REQUEST, loadBooksSaga ),
     takeLatest(EventsTypes.LOAD_EVENTS_REQUEST, loadEventsSaga ),
+    takeLatest(SpacesTypes.LOAD_SPACES_REQUEST, loadSpacesSaga ),
   ])
 } 
