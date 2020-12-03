@@ -144,7 +144,7 @@ function SpacesForm(){
             isForm={true}
             link="/spaces"
         >
-            <FormBody  title="Dados do Documento" >
+            <FormBody  title="Dados do Espaço" >
                 <Form onSubmit={handleSubmit} ref={formRef} initialData={ spaces.formData}>
                     <Input 
                         name="nome" 
