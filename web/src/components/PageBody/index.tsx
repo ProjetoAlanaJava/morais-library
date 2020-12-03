@@ -11,9 +11,16 @@ interface PageBodyProps {
     title: string;
     link?: string;
     isForm?: boolean;
+    reserveLink?: string;
+    isReserve?: boolean;
+    reservationTitle?: string;
+    isBook?: boolean;
+    myReservationsLink?: string; 
 }
 
-const  PageBody: React.FC<PageBodyProps> = ({ title, link, isForm, children}) => {
+const  PageBody: React.FC<PageBodyProps> = (
+    { title, link, isForm, isReserve, 
+      reservationTitle, reserveLink, isBook, myReservationsLink, children }) => {
     return (
         <div className="container">
             <article className="page-body">
@@ -21,12 +28,25 @@ const  PageBody: React.FC<PageBodyProps> = ({ title, link, isForm, children}) =>
                     <div className="top-bar-container">
                         <h1>{title}</h1>
                         
-                        {!isForm && link && (
-                            <Link to= {link}>
-                                <img src={addIcon} alt="Novo cadastro"/>
-                                Novo Cadastro
-                            </Link>
-                        )}
+                        <div className="button-block">
+                            {isReserve && reserveLink && (
+                                <Link to={reserveLink}>
+                                    <img src={addIcon} alt={reservationTitle}/>
+                                    {reservationTitle}
+                                </Link>
+                            )}
+                            {isBook && myReservationsLink && (
+                                <Link to= {myReservationsLink}>
+                                    Minhas reservas
+                                </Link>
+                            )}
+                            {!isForm && link && !isBook && (
+                                <Link to= {link}>
+                                    <img src={addIcon} alt="Novo Cadastro"/>
+                                    Novo Cadastro
+                                </Link>
+                            )}
+                        </div>
 
                         { isForm && link && (
                             <Link to= {link}>

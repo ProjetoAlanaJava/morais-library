@@ -51,3 +51,11 @@
   margin-right: 0.3rem ;
   width: 2.4rem;
 }
+
+.button-block {
+  display: flex;
+}
+
+.button-block > a {
+  margin-right: 2rem;
+}
