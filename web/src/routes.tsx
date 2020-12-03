@@ -8,8 +8,11 @@ import Login from './Pages/Login';
 import EventList from './Pages/EventsList';
 import SpacesList from './Pages/SpacesList';
 import UserForm from './Pages/UsersForm';
+import SpacesForm from './Pages/SpacesForm';
+import EventsForm from './Pages/EventsForm';
 
 import { isAuthenticated } from './services/auth';
+
 
 const PrivateRoute = ({...rest}) => {
     return isAuthenticated() ? <Route {...rest}/> : <Redirect to="/login"/>
@@ -24,7 +27,9 @@ function Routes(){
       <PrivateRoute  path="/users" exact component={ UsersList }/>
       <PrivateRoute  path="/users/form" exact component={ UserForm}/>
       <PrivateRoute  path="/events" exact component={ EventList }/>
+      <PrivateRoute  path="/events/form" exact component={ EventsForm }/>
       <PrivateRoute  path="/spaces" exact component={ SpacesList }/>
+      <PrivateRoute  path="/spaces/form" exact component={ SpacesForm}/>
       <Route  path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   )
