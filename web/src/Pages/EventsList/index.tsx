@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PageBody from '../../components/PageBody';
 import ListItem from '../../components/ListItem';
 
-import bookIcon from '../../assets/images/book.png';
+import calendarIcon from '../../assets/images/icons/calendario.svg';
 
 import { ApplicationState } from '../../store';
 import { loadEventsRequest } from '../../store/modules/events/actions';
@@ -37,7 +37,7 @@ function EventsList(){
             key={event.id}
             type="event"
             event={event}
-            avatar={bookIcon}
+            avatar={calendarIcon}
             header={event.title}
             description_one_title="Data"
             description_one_value={event.date}
