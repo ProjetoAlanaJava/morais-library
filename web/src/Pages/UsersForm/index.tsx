@@ -5,7 +5,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 // import { Document } from '../../utils/Document';
-import { Curso, User } from '../../store/modules/users/types'
+import {  User } from '../../store/modules/users/types'
 import Input from '../../components/Input';
 import PageBody from '../../components/PageBody';
 import FormBody from '../../components/FormBody';
@@ -28,12 +28,12 @@ import './styles.css';
 
 function UserForm(){
 
-    const [ optionsCursos, setOptionsCursos ] = useState([
+    const [ optionsCursos ] = useState([
       { value: 1, label: 'Psicologia'},
       { value: 2, label: 'Sistemas de Informação'},
     ])
 
-    const [ optionsAuthority, setOptionsAuthority ] = useState([
+    const [ optionsAuthority ] = useState([
       { value: 0, label: 'Aluno'},
       { value: 1, label: 'Usuário Externo'},
       { value: 2, label: 'Professor'},

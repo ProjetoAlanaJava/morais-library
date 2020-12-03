@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { deleteUser, loadUsersRequest, showUser } from '../../store/modules/users/actions';
+import { deleteUser, showUser } from '../../store/modules/users/actions';
 
 import deleteIcon from '../../assets/images/icons/delete-white.svg';
 import editIcon from '../../assets/images/icons/edit-white.svg';
