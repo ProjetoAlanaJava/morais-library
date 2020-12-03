@@ -12,7 +12,7 @@ import java.util.Date;
 @Component
 public class JWTAuthUtils {
 
-    @Value("${MY_SECRET}")
+    @Value("${spring.secret.jwt}")
     private String secret;
 
     Algorithm algo = Algorithm.HMAC256(secret);
