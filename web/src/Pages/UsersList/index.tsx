@@ -32,9 +32,8 @@ function UsersList(){
       isForm={false}
     >
       
+      { console.log(users)}
       { users.data.map( (user : User) => {
-        console.log(user)
-        
         return(
           <ListItem 
             key={user.id}

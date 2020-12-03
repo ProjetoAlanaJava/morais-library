@@ -70,15 +70,16 @@ function UserForm(){
           const { id } = users.data[0]
 
           data.id = id;
+          console.log('FormData', users.formData)
 
-          // api.put(`document/${_id}`, data).then(() =>{
-          //   successUpdate();
-          //   reset()
+          api.put(`auth/update/${id}`, data).then(() =>{
+            successUpdate();
+            reset()
 
-          //   dispatch(updateUser(data));
-          // }).catch(() => {
-          //   errorRegister();
-          // })
+            dispatch(updateUser(data));
+          }).catch(() => {
+            errorRegister();
+          })
 
 
         }else{
