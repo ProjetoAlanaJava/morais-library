@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import { Form } from '@unform/web';
@@ -9,7 +9,6 @@ import {  Space } from '../../store/modules/spaces/types'
 import Input from '../../components/Input';
 import PageBody from '../../components/PageBody';
 import FormBody from '../../components/FormBody';
-import Select from '../../components/Select';
 import SaveForm from '../../components/SaveForm';
 
 
@@ -27,18 +26,6 @@ import './styles.css';
 // ]
 
 function SpacesForm(){
-
-    const [ optionsCursos ] = useState([
-      { value: 1, label: 'Psicologia'},
-      { value: 2, label: 'Sistemas de Informação'},
-    ])
-
-    const [ optionsAuthority ] = useState([
-      { value: 0, label: 'Aluno'},
-      { value: 1, label: 'Usuário Externo'},
-      { value: 2, label: 'Professor'},
-      { value: 3, label: 'Funcionário'},
-    ])
 
     const dispatch = useDispatch();
     const formRef = useRef<FormHandles>(null);
