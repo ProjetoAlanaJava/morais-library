@@ -50,7 +50,7 @@ function SpacesReservationsForm(){
 
         console.log(data)
 
-        api.post('reserva-livro', {
+        api.post('reserva-espaco', {
           "usuario": { "id": 1},
           "date": data.data,
           "espaco": { "id": 2},
