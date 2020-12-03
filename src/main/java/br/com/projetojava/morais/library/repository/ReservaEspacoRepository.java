@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,5 +20,8 @@ public interface ReservaEspacoRepository extends JpaRepository<ReservaEspaco, Lo
 
     @Query(value = "SELECT COUNT(*) FROM reserva_espaco WHERE `data` = ? ", nativeQuery = true)
     Integer countByData(String dataMaximoEmprestimo);
+
+    @Query(value = "SELECT * FROM reserva_espaco WHERE usuario_id = ?", nativeQuery = true)
+    List<ReservaEspaco> findByUsuario(Long id);
 
 }

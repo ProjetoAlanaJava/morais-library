@@ -22,6 +22,9 @@ public class ReservaEspaco {
     private Long id;
 
     @OneToOne
+    private Usuario usuario;
+
+    @OneToOne
     private Evento evento;
 
     @OneToOne
@@ -44,11 +47,12 @@ public class ReservaEspaco {
 
 }
 /** Modelo de Request Para Reserva de Espaco
-        {
-            "evento" : {"id":2},
-            "espaco" : {"id": 2},
-            "data" : "20-12-2020",
-            "horarioInicioReserva" : "18:00:00",
-            "horarioFimReserva": "21:30:00"
-        }
+    {
+        "usuario" : {"id": 6},
+        "evento" : null,
+        "espaco" : {"id": 2},
+        "data" : "20-12-2020",
+        "horarioInicioReserva" : "18:00:00",
+        "horarioFimReserva": "21:30:00"
+    }
 **/

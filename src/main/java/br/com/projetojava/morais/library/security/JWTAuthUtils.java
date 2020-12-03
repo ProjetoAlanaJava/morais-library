@@ -4,17 +4,20 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
+import java.util.Properties;
 
 @Component
-public class JWTAuthUtils {
+public class JWTAuthUtils{
 
-    @Value("${spring.secret.jwt}")
-    private String secret;
+    public JWTAuthUtils() throws IOException {
+    }
 
+    private final String secret = getSecret();
     Algorithm algo = Algorithm.HMAC256(secret);
 
     public String createToken(String subjectOfToken) {
@@ -35,6 +38,19 @@ public class JWTAuthUtils {
 
     public Boolean tokenIsExpired(Date dateTokenExpire) {
         return dateTokenExpire.before(new Date());
+    }
+
+    private String getSecret() throws IOException {
+        Properties prop = getProp();
+        return prop.getProperty("jwt.secret");
+    }
+
+    private static Properties getProp() throws IOException {
+        Properties props = new Properties();
+        FileInputStream file = new FileInputStream("./system.properties");
+        props.load(file);
+        return props;
+
     }
 }
 

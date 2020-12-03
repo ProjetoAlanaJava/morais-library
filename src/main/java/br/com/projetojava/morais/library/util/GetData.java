@@ -10,7 +10,6 @@ public class GetData {
         DateTimeFormatter formatarData = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.now();
         return formatarData.format(localDate);
-
     }
 
     public String getCurrentHour() {

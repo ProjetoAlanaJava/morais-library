@@ -20,7 +20,28 @@ public class ReservaEspacoController {
 
     @GetMapping
     public List<ReservaEspaco> acharTodos() {
-        return service.findAll();
+
+        List<ReservaEspaco> response = service.findAll();
+        response.forEach(res -> {
+            res.getUsuario().setPassword(null);
+        });
+
+        return response;
+    }
+
+    @GetMapping(path = {"usuario/{id}"})
+    public ResponseEntity<?> acharPorIdUsuario(@PathVariable long id) {
+
+        if(id > 0) {
+
+            List<ReservaEspaco> response = service.findByUsuario(id);
+            response.forEach(res -> {
+                res.getUsuario().setPassword(null);
+            });
+
+            return ResponseEntity.ok().body(response);
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping(path = {"/{id}"})
@@ -28,7 +49,10 @@ public class ReservaEspacoController {
 
         if(id > 0) {
             return service.findById(id)
-                    .map(reservation -> ResponseEntity.ok().body(reservation))
+                    .map(reservation -> {
+                        reservation.getUsuario().setPassword(null);
+                        return ResponseEntity.ok().body(reservation);
+                    })
                     .orElse(ResponseEntity.notFound().build());
         }
 
