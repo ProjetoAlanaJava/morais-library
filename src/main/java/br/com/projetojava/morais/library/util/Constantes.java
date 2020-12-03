@@ -41,4 +41,8 @@ public class Constantes {
 
     public static final String FICHA_STATUS_GERADA = "gerada";
 
+    public static final String URI_SINGIN_MATCH = "/auth/signin";
+
+    public static final String URI_SINGUP_MATCH = "/auth/signup";
+
 }

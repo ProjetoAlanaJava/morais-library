@@ -2,11 +2,15 @@ package br.com.projetojava.morais.library.controller;
 
 import br.com.projetojava.morais.library.model.UserCredentials;
 import br.com.projetojava.morais.library.model.Usuario;
+import br.com.projetojava.morais.library.security.JWTAuthUtils;
 import br.com.projetojava.morais.library.service.UsuarioService;
 import br.com.projetojava.morais.library.util.Constantes;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,19 +19,33 @@ import java.util.Objects;
 public class AuthController {
 
     private final UsuarioService service;
+    private final JWTAuthUtils authentication;
 
-    public AuthController(UsuarioService usuarioService) {
+    public AuthController(UsuarioService usuarioService, JWTAuthUtils auth) {
         service = usuarioService;
+        authentication = auth;
     }
 
     @PostMapping(path = {"/signin"})
-    public ResponseEntity<Usuario> login(@RequestBody UserCredentials userCredentials) {
+    public ResponseEntity<?> login(@RequestBody UserCredentials userCredentials) {
 
         if(!Objects.isNull(userCredentials)) {
-
-            return service.findByUserAndPass(userCredentials.getUsername(), userCredentials.getPassword())
-                    .map(user -> ResponseEntity.ok().body(user))
-                    .orElse(ResponseEntity.notFound().build());
+            LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+            Usuario user = service.findByMatricula(userCredentials.getUsername());
+            if(Objects.nonNull(user)) {
+                boolean checkIsPass = passwordEncoder().matches(userCredentials.getPassword(), user.getPassword());
+                if(checkIsPass) {
+                    String tokenCreated = authentication.createToken(user.getNome());
+                    user.setPassword(null);
+                    map.put("token", tokenCreated);
+                    map.put("usuario", user);
+                    return ResponseEntity.ok().body(map);
+                } else {
+                    return ResponseEntity.badRequest().body("Senha incorreta!");
+                }
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         }
         return ResponseEntity.badRequest().build();
     }
@@ -48,6 +66,8 @@ public class AuthController {
                 usuario.setLimiteLivros(5);
             }
 
+            String senhaCriptograda = passwordEncoder().encode(usuario.getPassword());
+            usuario.setPassword(senhaCriptograda);
             user = service.save(usuario);
             if(Objects.nonNull(user)) {
                 return ResponseEntity.ok().body("Usuário criado com sucesso!");
@@ -62,37 +82,27 @@ public class AuthController {
     @GetMapping(path = {"/usuarios"})
     public List<Usuario> findAll() {
 
-        if(service.findAll().stream().iterator().hasNext()) {
-            service.findAll().stream().iterator().next().setPassword(null);
-        }
+        List<Usuario> usersResponse = service.findAll();
 
-        return service.findAll();
+        usersResponse.forEach(user -> {
+            user.setPassword(null);
+        });
+
+        return usersResponse;
     }
 
     @GetMapping(path = {"/usuarios/{id}"})
     public ResponseEntity<Usuario> findById(@PathVariable long id) {
 
-        Usuario rUser = new Usuario();
-
         if(id > 0) {
             return service.findById(id)
                     .map(user -> {
-                        rUser.setId(user.getId());
-                        rUser.setMatricula(user.getMatricula());
-                        rUser.setAuthority(user.getAuthority());
-                        rUser.setNome(user.getNome());
-                        rUser.setCpf(user.getCpf());
-                        rUser.setAtivo(user.getAtivo());
-                        rUser.setCurso(user.getCurso());
-                        rUser.setCargo(user.getCargo());
-                        rUser.setLimiteLivros(user.getLimiteLivros());
-                        rUser.setTelefone(user.getTelefone());
-                        rUser.setEmail(user.getEmail());
-
-                        return ResponseEntity.ok().body(rUser);
+                        user.setPassword(null);
+                        return ResponseEntity.ok().body(user);
                     })
                     .orElse(ResponseEntity.notFound().build());
         }
+
         return ResponseEntity.badRequest().build();
     }
 
@@ -133,8 +143,9 @@ public class AuthController {
         }
 
         return ResponseEntity.badRequest().build();
-
     }
 
-
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }
 }

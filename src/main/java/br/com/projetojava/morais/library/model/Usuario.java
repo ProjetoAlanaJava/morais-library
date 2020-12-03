@@ -3,11 +3,8 @@ package br.com.projetojava.morais.library.model;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -38,11 +35,10 @@ public class Usuario {
 
     @OneToOne
     @JoinColumn(name = "curso_id")
-    private Curso curso; // FK
+    private Curso curso;
 
     private String cargo;
-
-    @Column(nullable = false)
+    
     private Integer limiteLivros;
 
     private String telefone;
@@ -51,6 +47,9 @@ public class Usuario {
 }
 
 /**
+ *
+ * [Depreciado]"ativo": true, ---> Não enviar mais, setado no AuthController /signup
+ * [Depreciado]"limiteLivros": 10, ---> Não enviar, setado no AuthController /signup
     Request para criar novo usuario!
         {
          "matricula" : "20191022024",
@@ -58,10 +57,8 @@ public class Usuario {
          "authority" : "usuario", ---> usuario, externo, professor ou funcionario
          "nome": "Gabriel Moreira de Oliveira",
          "cpf": 12022014199,
-         [Depreciado]"ativo": true, ---> Não enviar mais, setado no AuthController /signup
          "curso": {"id": 3},
          "cargo": null, ---> Enviar cargo caso seja funcionario, Ex: Bibliotecario
-         [Depreciado]"limiteLivros": 10, ---> Não enviar, setado no AuthController /signup
          "telefone": "83999706080",
          "email":"teste@gmail.com"
         }

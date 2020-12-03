@@ -102,6 +102,7 @@ public class EmprestimoController {
                 GetData currentData = new GetData();
                 emprestimo.setDataEmprestimo(currentData.getCurrentData());
                 emprestimo.setHoraEmprestimo(currentData.getCurrentHour());
+                emprestimo.setDevolvido(false);
 
                 if(livroEstaReservado){
                     reservaLivroService.deleteById(livroReservado.getId()); //deletando reserva feita para não gerar futuros conflitos
@@ -170,13 +171,13 @@ public class EmprestimoController {
 
     /**
      *
-     * @param id -> ID do emprestimo a ser deletado!!
-     * @return 200 - Se ele conseguir deletar emprestimo
+     * @param id -> ID do emprestimo a ser devolvido!!
+     * @return 200 - Se ele conseguir devolver o emprestimo
      * 200 - Com a multa gerada pelo emprestimo, se for o caso
      * 200 - Se a multa não foi paga ainda, um aviso que a multa não foi paga
      * 402 - Se o id não for válido
      */
-    @DeleteMapping(value = {"/{id}"})
+    @PutMapping(value = {"/devolucao/{id}"})
     public ResponseEntity<?> realizarDevolucao(@PathVariable long id) {
 
         if(id > 0) {
@@ -192,7 +193,8 @@ public class EmprestimoController {
 
                     if(acharMulta.getSituacao().equals(Constantes.MULTA_OK)) {
                         multaService.deleteById(acharMulta.getId());
-                        service.delete(id);
+                        devolucao.setDevolvido(true);
+                        service.save(devolucao);
                         return ResponseEntity.ok().body("Devolução realizada com sucesso!");
                     }
 
@@ -223,7 +225,8 @@ public class EmprestimoController {
                 }
 
             } else {
-                service.delete(id);
+                devolucao.setDevolvido(true);
+                service.save(devolucao);
                 return ResponseEntity.ok().body("Devolução realizada com sucesso!");
             }
         }

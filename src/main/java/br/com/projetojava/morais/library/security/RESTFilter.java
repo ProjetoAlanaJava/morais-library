@@ -1,5 +1,6 @@
 package br.com.projetojava.morais.library.security;
 
+import br.com.projetojava.morais.library.util.Constantes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -23,21 +24,33 @@ public class RESTFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
+        JWTAuthUtils auth = new JWTAuthUtils();
 
         log.info("Começando uma trasanção em : {}", req.getRequestURI());
-        String token = req.getHeader("access_token");
-
-        if(Objects.nonNull(token) && !token.isEmpty()) {
+        if(req.getRequestURI().equals(Constantes.URI_SINGIN_MATCH) || req.getRequestURI().equals(Constantes.URI_SINGUP_MATCH)) {
             chain.doFilter(request, response);
             log.info("Commitando uma trasanção em : {}", req.getRequestURI());
 
         } else {
-            response.resetBuffer();
-            response.setCharacterEncoding("UTF-8");
-            response.getOutputStream().print("[NEGADO] Requesição sem token de identificação!");
-            log.error("Requesição sem token de identificação!");
-        }
 
+            String token = req.getHeader("Authorization");
+
+            if(Objects.nonNull(token)) {
+                if(auth.verifyToken(token)) {
+                    chain.doFilter(request, response);
+                    log.info("Commitando uma trasanção em : {}", req.getRequestURI());
+                } else {
+                    response.getOutputStream().print("[NEGADO] Esse token não é válido");
+                }
+
+
+            } else {
+                response.resetBuffer();
+                response.setCharacterEncoding("UTF-8");
+                response.getOutputStream().print("[NEGADO] Requesição sem token de identificação!");
+                log.error("Requesição sem token de identificação!");
+            }
+        }
     }
 
     @Override

@@ -12,7 +12,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -50,6 +49,7 @@ public class Emprestimo {
     @Column(columnDefinition = "INT DEFAULT 0")
     Integer renovacoes;
 
+    Boolean devolvido;
 }
 
 /*
