@@ -27,7 +27,10 @@ function BooksList(){
     <PageBody 
       title="Livros - Lista"
       link="/livros/form"
-      isForm={false}
+      isBook={true}
+      reserveLink="/books/reservations/form"
+      reservationTitle="Nova reserva"
+      myReservationsLink="books/my-reservations"
     >
             
       { books.data.map( (book: Book) => {
@@ -35,6 +38,7 @@ function BooksList(){
         <ListItem 
             key={book.id}
             type="book"
+            isBook={true}
             avatar={bookIcon}
             header={book.titulo}
             description_one_title="Editora"
@@ -45,6 +49,7 @@ function BooksList(){
             additional_information_value={book.qtd_geral}
             editLink="/users/form"
             deleteLink="/users"
+            reserveLink='books'
         />
       </div>
       })}
