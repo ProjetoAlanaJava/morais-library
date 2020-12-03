@@ -72,7 +72,18 @@ function UserForm(){
           data.id = id;
           console.log('FormData', users.formData)
 
-          api.put(`auth/update/${id}`, data).then(() =>{
+          api.put(`auth/update/${id}`, {
+            "matricula": data.matricula,  
+            "authority": data.authority,
+            "nome": data.nome,
+            "cpf": data.cpf,
+            "ativo": true,
+            "curso": {"id": data.curso},
+            "cargo": data.cargo,
+            "limiteLivros": 10,
+            "telefone": data.telefone,
+            "email": data.email
+          }).then(() =>{
             successUpdate();
             reset()
 
