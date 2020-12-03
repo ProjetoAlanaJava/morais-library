@@ -1,35 +1,35 @@
 package br.com.projetojava.morais.library.controller;
 
 import br.com.projetojava.morais.library.model.Curso;
-import br.com.projetojava.morais.library.repository.CursoRepository;
 import br.com.projetojava.morais.library.service.CursoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(path = {"/cursos"})
 public class CursoController {
 
-    private CursoService cursoService;
+    private final CursoService service;
 
-    public CursoController(CursoService cursoService){
-        this.cursoService = cursoService;
+    public CursoController(CursoService cursoService) {
+        service = cursoService;
     }
 
     @GetMapping
     public List<Curso> findAll() {
-        return cursoService.findAll();
+        return service.findAll();
     }
 
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity findById(@PathVariable long id) {
+    public ResponseEntity<Curso> findById(@PathVariable long id) {
 
         if(id > 0) {
-            return cursoService.findById(id)
+            return service.findById(id)
                     .map(curso -> {
-                        cursoService.findById(id);
+                        service.findById(id);
                         return ResponseEntity.ok().body(curso);
                     }).orElse(ResponseEntity.notFound().build());
         }
@@ -40,22 +40,22 @@ public class CursoController {
     @PostMapping
     public Curso create(@RequestBody Curso curso) {
         if(curso != null) {
-            return cursoService.save(curso);
+            return service.save(curso);
         }
 
         return null;
     }
 
     @PutMapping(path = {"/{id}"})
-    public ResponseEntity update(@PathVariable long id, @RequestBody Curso curso) {
+    public ResponseEntity<Curso> update(@PathVariable long id, @RequestBody Curso curso) {
 
-        if(curso != null && id > 0) {
-            return cursoService.findById(id)
+        if(Objects.nonNull(curso) && id > 0) {
+            return service.findById(id)
                     .map(course -> {
                         course.setNome(curso.getNome());
                         course.setArea(curso.getArea());
                         course.setTipo(curso.getTipo());
-                        Curso novoCurso = cursoService.save(course);
+                        Curso novoCurso = service.save(course);
                         return ResponseEntity.ok().body(novoCurso);
                     }).orElse(ResponseEntity.notFound().build());
         }
@@ -67,9 +67,9 @@ public class CursoController {
     public ResponseEntity<Object> delete(@PathVariable long id) {
 
         if(id > 0) {
-            return cursoService.findById(id)
+            return service.findById(id)
                     .map(curso -> {
-                        cursoService.deleteById(id);
+                        service.deleteById(id);
                         return ResponseEntity.ok().build();
                     }).orElse(ResponseEntity.notFound().build());
         }
