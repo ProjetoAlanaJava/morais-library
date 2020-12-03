@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -12,11 +12,11 @@ import FormBody from '../../../components/FormBody';
 import SaveForm from '../../../components/SaveForm';
 
 
-import { addSpace, updateSpace } from '../../../store/modules/spaces/actions';
-import { errorRegister, successRegister, successUpdate } from '../../../utils/notifications';
+// import { addSpace, updateSpace } from '../../../store/modules/spaces/actions';
+import { errorRegister, successRegister } from '../../../utils/notifications';
 import api from '../../../services/api';
 
-import { ApplicationState } from '../../../store';
+// import { ApplicationState } from '../../../store';
 
 import './styles.css';
 
@@ -27,10 +27,10 @@ import './styles.css';
 
 function SpacesReservationsForm(){
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const formRef = useRef<FormHandles>(null);
 
-    const { spaces } = useSelector( (state: ApplicationState) => state); 
+    // const { spaces } = useSelector( (state: ApplicationState) => state); 
 
     const handleSubmit: SubmitHandler<SpaceReservation> = async (data , { reset })=> {
 
