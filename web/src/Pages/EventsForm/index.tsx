@@ -26,7 +26,7 @@ import './styles.css';
 //   { value: 2, label: 'Sistemas de Informação'},
 // ]
 
-function UserForm(){
+function EventsForm(){
 
     const [ optionsCursos ] = useState([
       { value: 1, label: 'Psicologia'},
@@ -72,18 +72,7 @@ function UserForm(){
           data.id = id;
           console.log('FormData', users.formData)
 
-          api.put(`auth/update/${id}`, {
-            "matricula": data.matricula,  
-            "authority": data.authority,
-            "nome": data.nome,
-            "cpf": data.cpf,
-            "ativo": true,
-            "curso": {"id": data.curso},
-            "cargo": data.cargo,
-            "limiteLivros": 10,
-            "telefone": data.telefone,
-            "email": data.email
-          }).then(() =>{
+          api.put(`auth/update/${id}`, data).then(() =>{
             successUpdate();
             reset()
 
@@ -216,4 +205,4 @@ function UserForm(){
     )
 }
 
-export default UserForm;
+export default EventsForm;

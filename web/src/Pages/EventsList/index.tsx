@@ -26,7 +26,7 @@ function EventsList(){
   return (
     <PageBody 
       title="Eventos - Lista"
-      link="/eventos/form"
+      link="/events/form"
       isForm={false}
     >
             
