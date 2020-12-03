@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "spring.secret",
+      "type": "java.lang.String",
+      "description": "Variables for secrete inside application, like the jwt encrypt secret!!!"
+    },
+    {
+      "name": "spring.secret.jwt",
+      "type": "java.lang.String",
+      "description": "Secrete of jwt inside, to get in heroku"
+    }
+  ]
+}

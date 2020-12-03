@@ -1,4 +1,6 @@
 spring:
+  secret:
+    jwt: ${MY_SECRET}
   jpa:
     hibernate:
       ddl-auto: update
