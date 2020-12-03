@@ -10,6 +10,7 @@ import SpacesList from './Pages/SpacesList';
 import UserForm from './Pages/UsersForm';
 import SpacesForm from './Pages/SpacesForm';
 import EventsForm from './Pages/EventsForm';
+import SpacesReservationsForm from './Pages/ReservationsForms/SpacesReservations';
 
 import { isAuthenticated } from './services/auth';
 
@@ -30,6 +31,7 @@ function Routes(){
       <PrivateRoute  path="/events/form" exact component={ EventsForm }/>
       <PrivateRoute  path="/spaces" exact component={ SpacesList }/>
       <PrivateRoute  path="/spaces/form" exact component={ SpacesForm}/>
+      <PrivateRoute  path="/spaces/reservation/form" exact component={ SpacesReservationsForm}/>
       <Route  path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   )

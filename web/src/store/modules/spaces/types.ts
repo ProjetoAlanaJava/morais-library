@@ -17,6 +17,11 @@ export interface Space {
   capacidade: number,
   andar: number,
 }
+export interface SpaceReservation {
+  data: string,
+  horarioInicioReserva: string,
+  horarioFimReserva: string,
+}
 
 
 export interface SpacesState {
