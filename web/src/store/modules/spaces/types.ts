@@ -15,13 +15,14 @@ export interface Space {
   horarioFechamento: string,
   tipo: string,
   capacidade: number,
+  andar: number,
 }
 
 
 export interface SpacesState {
   readonly data: Space [];
   readonly isEdit: boolean;
-  // readonly formData: Event | undefined;
+  readonly formData: Space | undefined;
   readonly loading: boolean;
   readonly error: boolean;
 }
