@@ -140,7 +140,7 @@ function EventsForm(){
             isForm={true}
             link="/events"
         >
-            <FormBody  title="Dados do Documento" >
+            <FormBody  title="Dados do Evento" >
                 <Form onSubmit={handleSubmit} ref={formRef} initialData={ events.formData}>
                 <Input 
                         name="title" 
