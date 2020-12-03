@@ -9,6 +9,7 @@ import { deleteUser, showUser } from '../../store/modules/users/actions';
 import { deleteSpace, showSpace } from '../../store/modules/spaces/actions';
 import { deleteEvent, showEvent } from '../../store/modules/events/actions';
 
+import addIcon from '../../assets/images/icons/add-white.svg';
 import deleteIcon from '../../assets/images/icons/delete-white.svg';
 import editIcon from '../../assets/images/icons/edit-white.svg';
 
@@ -26,6 +27,8 @@ interface ListItemProps {
     user?: User ;
     space?: Space;
     event?: Event;
+    isBook?: boolean;
+    reserveLink?: string;
     type: string;
     header: string;
     description_one_value: string | Date | any;
@@ -39,7 +42,8 @@ interface ListItemProps {
 const ListItem: React.FC<ListItemProps> = (
     {   editLink, deleteLink, avatar, description_one_value, description_one_title, 
         description_two_value, description_two_title, additional_information_value, 
-        additional_information_title, header, type, user, space, event
+        additional_information_title, header, type, user, space, event, reserveLink,
+        isBook
     }) =>{
 
     const dispatch = useDispatch();
@@ -84,6 +88,10 @@ const ListItem: React.FC<ListItemProps> = (
         return console.log('Delete Link')
     }
 
+    function reserveItem(){
+        console.log('RESERVE LINK')
+    }
+
     return (
         <main className="list-item">
             { avatar?
@@ -110,13 +118,24 @@ const ListItem: React.FC<ListItemProps> = (
             </article>
 
             <div className="options">
-                <Link to={editLink}>
-                    <img src={editIcon} alt="Editar item" onClick={editItem}/>
-                </Link>      
-                
-                <Link to={deleteLink}>
-                    <img src={deleteIcon} alt="Deletar item" onClick={deleteItem}/>
-                </Link>
+                {!isBook && (
+                    <>
+                        <Link to={editLink}>
+                            <img src={editIcon} alt="Editar item" onClick={editItem}/>
+                        </Link>      
+                        
+                        <Link to={deleteLink}>
+                            <img src={deleteIcon} alt="Deletar item" onClick={deleteItem}/>
+                        </Link>
+                    </>
+                )}
+
+                { reserveLink && (
+                    <Link to={reserveLink} id="reserve-link" onClick={reserveItem}>
+                        <img src={addIcon} alt="Nova reserva" />
+                        Reservar 
+                    </Link>    
+                )}
             </div>
         </main>
     )

@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import PageBody from '../../components/PageBody';
 import ListItem from '../../components/ListItem';
 
-import bookIcon from '../../assets/images/book.png';
+import SpaceIcon from '../../assets/images/icons/space-icon.svg';
 
 import { ApplicationState } from '../../store';
+import { loadSpacesRequest } from '../../store/modules/spaces/actions';
 import { Space } from '../../store/modules/spaces/types';
 
 import './styles.css';
-import { loadSpacesRequest } from '../../store/modules/spaces/actions';
 
 function SpacesList(){
 
@@ -28,6 +28,10 @@ function SpacesList(){
       title="Espaços - Lista"
       link="/spaces/form"
       isForm={false}
+      isReserve={true}
+      // isBook={false}
+      reserveLink="/spaces/reservation/form"
+      reservationTitle="Nova reserva"
     >
             
       { spaces.data.map( (space: Space) => {
@@ -37,7 +41,7 @@ function SpacesList(){
             key={space.id}
             type="space"
             space={space}
-            avatar={bookIcon}
+            avatar={SpaceIcon}
             header={space.nome}
             description_one_title="Setor"
             description_one_value={space.setor}
