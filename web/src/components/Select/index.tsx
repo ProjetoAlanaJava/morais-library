@@ -15,7 +15,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 const Select: React.FC<SelectProps> = ({ label, name, options, ...rest }) => {
 
   const selectRef = useRef<HTMLSelectElement>(null)
-  const { fieldName, registerField } = useField(name);
+  const { fieldName, registerField, defaultValue } = useField(name);
 
   useEffect(() =>{
     registerField({
@@ -30,7 +30,10 @@ const Select: React.FC<SelectProps> = ({ label, name, options, ...rest }) => {
       <label htmlFor={ name }>{ label }</label>
       <select  id={ name } { ...rest } ref={selectRef}>
         {options.map(option => {
-          return <option key={option.value} value={option.value}>{option.label}</option>
+          return <option 
+            key={option.value} 
+            value={option.value} 
+            defaultValue={defaultValue}>{option.label}</option>
         })}
       </select>
     </div>
