@@ -5,7 +5,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 // import { Document } from '../../utils/Document';
-import { Curso, User } from '../../store/modules/users/types'
+import {  User } from '../../store/modules/users/types'
 import Input from '../../components/Input';
 import PageBody from '../../components/PageBody';
 import FormBody from '../../components/FormBody';
@@ -28,12 +28,12 @@ import './styles.css';
 
 function UserForm(){
 
-    const [ optionsCursos, setOptionsCursos ] = useState([
+    const [ optionsCursos ] = useState([
       { value: 1, label: 'Psicologia'},
       { value: 2, label: 'Sistemas de Informação'},
     ])
 
-    const [ optionsAuthority, setOptionsAuthority ] = useState([
+    const [ optionsAuthority ] = useState([
       { value: 0, label: 'Aluno'},
       { value: 1, label: 'Usuário Externo'},
       { value: 2, label: 'Professor'},
@@ -52,15 +52,17 @@ function UserForm(){
       try{
         formRef.current?.setErrors({});
 
-        // const schemaDoc = Yup.object().shape({        
-        //     apelido: Yup.string().required('O apelido é obrigatório'),
-        //     conteudo: Yup.string().required('O conteúdo é obrigatório'),
-        //     destino: Yup.string().required('O destino é obrigatório'),
-        //   })
+        const schemaDoc = Yup.object().shape({        
+            matricula: Yup.string().required('O preenchimento da matrícula é obrigatório'),
+            nome: Yup.string().required('O preenchimento do nome é obrigatório'),
+            cpf: Yup.string().required('O preenchimento do cpf é obrigatório'),
+            email: Yup.string().required('O preenchimento do Email é obrigatório'),
+            telefone: Yup.string().required('O preenchimento do telefone é obrigatório'),
+          })
   
-        // await schemaDoc.validate(data, {
-        //   abortEarly: false,
-        // })
+        await schemaDoc.validate(data, {
+          abortEarly: false,
+        })
 
         console.log('IS_EDIT', users.isEdit)
 
@@ -68,15 +70,16 @@ function UserForm(){
           const { id } = users.data[0]
 
           data.id = id;
+          console.log('FormData', users.formData)
 
-          // api.put(`document/${_id}`, data).then(() =>{
-          //   successUpdate();
-          //   reset()
+          api.put(`auth/update/${id}`, data).then(() =>{
+            successUpdate();
+            reset()
 
-          //   dispatch(updateUser(data));
-          // }).catch(() => {
-          //   errorRegister();
-          // })
+            dispatch(updateUser(data));
+          }).catch(() => {
+            errorRegister();
+          })
 
 
         }else{

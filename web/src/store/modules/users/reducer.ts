@@ -24,16 +24,17 @@ const reducer: Reducer<UsersState> = (state = INITIAL_STATE, action) : UsersStat
 
     case UsersTypes.LOAD_USERS_REQUEST:
       console.log('REDUCER - LOAD_USERS_REQUEST')
-      return {...state, loading: true, isEdit: false}
+      return {...state, loading: true, isEdit: false, formData:undefined}
 
     case UsersTypes.LOAD_USERS:
       console.log('REDUCER - LOAD_USERS')
-      return { ...state,  data: action.payload.data, loading: false, error: false,  isEdit: false};
+      return { ...state,  data: action.payload.data, loading: false, 
+        error: false,  isEdit: false, formData:undefined};
 
     
     case UsersTypes.SHOW_USER:
       var userId = action.payload.data.id;
-
+      console.log('REDUCER - SHOW_USER')
       const user = state.data.filter( (user) => {
         if(userId === user.id){
           return user;
@@ -53,7 +54,7 @@ const reducer: Reducer<UsersState> = (state = INITIAL_STATE, action) : UsersStat
       console.log('DELETE_USER')
       console.log(userDeleteId)
       return {...state, data: state.data.filter( user => 
-        user !== userDeleteId
+        user.id !== userDeleteId
       )};
 
     default:

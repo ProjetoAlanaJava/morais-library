@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { showUser } from '../../store/modules/users/actions';
+import { deleteUser, showUser } from '../../store/modules/users/actions';
 
 import deleteIcon from '../../assets/images/icons/delete-white.svg';
 import editIcon from '../../assets/images/icons/edit-white.svg';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 
 
 import './styles.css';
 import { User } from '../../store/modules/users/types';
+import { useDispatch } from 'react-redux';
 
 interface ListItemProps {
     avatar?: string;
@@ -34,21 +35,28 @@ const ListItem: React.FC<ListItemProps> = (
         additional_information_title, header, type, user
     }) =>{
 
+    const dispatch = useDispatch();
+
     function editItem(){
 
         if(user){
-            return console.log('EDIT - USUARIO', user)
+            dispatch(showUser(user))
         }
-        return console.log('Edit Link generic')
+
+        return console.log('Edit Link ')
     }
 
     function deleteItem(){
-        const confirmDelete = window.confirm('Você deseja realmente excluir esse documento?')
+        const confirmDelete = window.confirm('Você deseja realmente excluir esse registro?')
 
         if(confirmDelete){
-          return console.log('Delete Link')
+            if(user){
+                api.delete(`auth/delete/${user.id}`);
+                dispatch(deleteUser(user.id))
+                // dispatch(loadUsersRequest())
+            }
         }
-
+        return console.log('Delete Link')
     }
 
     return (
