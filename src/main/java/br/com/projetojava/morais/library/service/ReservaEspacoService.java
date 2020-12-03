@@ -21,6 +21,10 @@ public class ReservaEspacoService {
         return repository.findByDataAndhorarioInicioReservaAndHorarioFimReserva(data, horarioInicio, horarioFim);
     }
 
+    public List<ReservaEspaco> findByUsuario(Long idUsuarioReservas) {
+        return repository.findByUsuario(idUsuarioReservas);
+    }
+
     public Integer countALl() {
         return repository.countAllById();
     }
