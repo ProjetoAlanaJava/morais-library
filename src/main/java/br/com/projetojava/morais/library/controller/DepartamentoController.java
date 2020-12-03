@@ -11,24 +11,25 @@ import java.util.List;
 @RequestMapping(path = {"/departamentos"})
 public class DepartamentoController {
 
-    private DepartamentoService departamentoService;
 
-    public DepartamentoController( DepartamentoService departamentoService) {
-        this.departamentoService = departamentoService;
+    private final DepartamentoService service;
+
+    public DepartamentoController(DepartamentoService departamentoService) {
+        service = departamentoService;
     }
 
     @GetMapping
-    public List findAll() {
-        return departamentoService.findAll();
+    public List<Departamento> findAll() {
+        return service.findAll();
     }
 
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity findById(@PathVariable long id) {
+    public ResponseEntity<Departamento> findById(@PathVariable long id) {
 
         if(id > 0) {
-            return departamentoService.findById(id)
+            return service.findById(id)
                     .map(departamento -> {
-                        departamentoService.findById(id);
+                        service.findById(id);
                         return ResponseEntity.ok().body(departamento);
                     }).orElse(ResponseEntity.notFound().build());
         }
@@ -39,21 +40,20 @@ public class DepartamentoController {
     @PostMapping
     public Departamento create(@RequestBody Departamento departamento) {
         if(departamento != null) {
-            return departamentoService.save(departamento);
+            return service.save(departamento);
         }
 
         return null;
     }
 
     @PutMapping(path = {"/{id}"})
-    public ResponseEntity update(@PathVariable long id, @RequestBody Departamento departamento) {
+    public ResponseEntity<Departamento> update(@PathVariable long id, @RequestBody Departamento departamento) {
 
         if(departamento != null && id > 0) {
-            return departamentoService.findById(id)
+            return service.findById(id)
                     .map(dept-> {
                         dept.setNome(departamento.getNome());
-                        dept.setArea(departamento.getArea());
-                        Departamento novoDepartamento = departamentoService.save(dept);
+                        Departamento novoDepartamento = service.save(dept);
                         return ResponseEntity.ok().body(novoDepartamento);
                     }).orElse(ResponseEntity.notFound().build());
         }
@@ -62,12 +62,12 @@ public class DepartamentoController {
     }
 
     @DeleteMapping(path = {"/{id}"})
-    public ResponseEntity delete(@PathVariable long id) {
+    public ResponseEntity<Object> delete(@PathVariable long id) {
 
         if(id > 0) {
-            return departamentoService.findById(id)
+            return service.findById(id)
                     .map(departamento -> {
-                        departamentoService.deleteById(id);
+                        service.deleteById(id);
                         return ResponseEntity.ok().build();
                     }).orElse(ResponseEntity.notFound().build());
 

@@ -24,10 +24,11 @@ import java.util.List;
 
 public class UsuarioInsertTest {
 
-    /*@Autowired
-    private UsuarioRepository usuarioRepository;*/
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    UsuarioService usuarioService = new UsuarioService();
+
+    UsuarioService usuarioService = new UsuarioService(usuarioRepository);
 
     @Test
     public void criarUsuario() {
@@ -37,7 +38,6 @@ public class UsuarioInsertTest {
         Departamento departamento = new Departamento();
 
         departamento.setId(1L);
-        departamento.setArea("Tecnlogia");
         departamento.setNome("Coordenação de Sistema de Informação");
 
         curso.setNome("Sistemas de Informação");
@@ -53,11 +53,9 @@ public class UsuarioInsertTest {
         user.setNome("Gabriel Moreira");
         user.setCpf(1011114500L);
         user.setAtivo(true);
-        user.setCurso(cursos);
-        user.setDepartamento(departamento);
+        user.setCurso(null);
         user.setCargo("");
         user.setLimiteLivros(10);
-        user.setTipo("Aluno");
         user.setTelefone("83999151199");
         user.setEmail("teste@projetoalana.com");
 

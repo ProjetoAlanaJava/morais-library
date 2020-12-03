@@ -23,4 +23,19 @@ public class Curso {
 
     private String tipo;
 
+    @OneToOne
+    @JoinColumn(name = "departamento_id")
+    private Departamento departamento;
+
 }
+
+/** Modelo de Request para criação de departamentos
+ * {
+ *     "nome": "Psicologia",
+ *     "area": "Humanas",
+ *     "tipo": "Presencial",
+ *     "departamento": {"id": 1}
+ * }
+ **/
+
+

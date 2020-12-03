@@ -1,9 +1,7 @@
 package br.com.projetojava.morais.library.service;
 
 import br.com.projetojava.morais.library.model.Departamento;
-import br.com.projetojava.morais.library.model.Usuario;
 import br.com.projetojava.morais.library.repository.DepartamentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,23 +10,26 @@ import java.util.Optional;
 @Service
 public class DepartamentoService {
 
-    @Autowired
-    private DepartamentoRepository departamentoRepository;
+    private final DepartamentoRepository repository;
+
+    public DepartamentoService(DepartamentoRepository departamentoRepository) {
+        repository = departamentoRepository;
+    }
 
     public Departamento save(Departamento departamento) {
-        return departamentoRepository.save(departamento);
+        return repository.save(departamento);
     }
 
     public List<Departamento> findAll() {
-        return departamentoRepository.findAll();
+        return repository.findAll();
     }
 
     public Optional<Departamento> findById(Long id) {
-        return departamentoRepository.findById(id);
+        return repository.findById(id);
     }
 
     public void deleteById(Long id) {
-       departamentoRepository.deleteById(id);
+       repository.deleteById(id);
     }
 }
 
