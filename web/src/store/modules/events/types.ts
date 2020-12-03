@@ -20,7 +20,7 @@ export interface Event {
 export interface EventsState {
   readonly data: Event[];
   readonly isEdit: boolean;
-  // readonly formData: Event | undefined;
+  readonly formData: Event | undefined;
   readonly loading: boolean;
   readonly error: boolean;
 }

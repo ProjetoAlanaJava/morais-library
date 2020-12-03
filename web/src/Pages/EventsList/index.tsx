@@ -36,6 +36,7 @@ function EventsList(){
         <ListItem 
             key={event.id}
             type="event"
+            event={event}
             avatar={bookIcon}
             header={event.title}
             description_one_title="Data"

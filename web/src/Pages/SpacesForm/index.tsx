@@ -140,7 +140,7 @@ function SpacesForm(){
 
     return (
         <PageBody 
-            title="Usuários - Formulário"
+            title="Espaços - Formulário"
             isForm={true}
             link="/spaces"
         >
