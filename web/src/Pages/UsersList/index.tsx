@@ -39,7 +39,6 @@ function UsersList(){
         return(
           <ListItem 
             key={user.id}
-            type="user"
             user={user}
             avatar={avatar}
             header={user.nome}

@@ -34,8 +34,6 @@ function BooksReservationsList(){
         return <div className="book-list">
         <ListItem 
             key={book.id}
-            type="book"
-            isBook={true}
             avatar={bookIcon}
             header={book.livro.titulo}
             description_one_title="Editora"

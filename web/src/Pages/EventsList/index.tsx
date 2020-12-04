@@ -35,7 +35,6 @@ function EventsList(){
         return       <div className="events-list">
         <ListItem 
             key={event.id}
-            type="event"
             event={event}
             avatar={calendarIcon}
             header={event.title}
