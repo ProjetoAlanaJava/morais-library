@@ -31,6 +31,7 @@ function BooksList(){
       reserveLink="/books/reservations/form"
       reservationTitle="Nova reserva"
       myReservationsLink="books/my-reservations"
+      isBookPage={true}
     >
             
       { books.data.map( (book: Book) => {
