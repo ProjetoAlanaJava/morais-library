@@ -15,12 +15,15 @@ interface PageBodyProps {
     isReserve?: boolean;
     reservationTitle?: string;
     isBook?: boolean;
-    myReservationsLink?: string; 
+    myReservationsLink?: string;
+    uploadTitle?: string;
+    uploadLink?:string; 
 }
 
 const  PageBody: React.FC<PageBodyProps> = (
     { title, link, isForm, isReserve, 
-      reservationTitle, reserveLink, isBook, myReservationsLink, children }) => {
+      reservationTitle, reserveLink, isBook, myReservationsLink, uploadLink,
+      uploadTitle, children }) => {
     return (
         <div className="container">
             <article className="page-body">
@@ -40,6 +43,13 @@ const  PageBody: React.FC<PageBodyProps> = (
                                     Minhas reservas
                                 </Link>
                             )}
+
+                            {uploadLink && uploadTitle && (
+                                <Link to= {uploadLink}>
+                                    {uploadTitle}
+                                </Link>
+                            )}
+
                             {!isForm && link && !isBook && (
                                 <Link to= {link}>
                                     <img src={addIcon} alt="Novo Cadastro"/>
