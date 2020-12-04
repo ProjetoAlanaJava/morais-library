@@ -6,16 +6,19 @@ import { BooksState } from './modules/books/types';
 import { EventsState } from './modules/events/types';
 import { SpacesState } from './modules/spaces/types';
 import { LoginState } from './modules/login/types'
+// import { FichaCatalograficaState } from './modules/fichaCatalografica/types';
 
 import rootReducer from './modules/rootReducer';
 import rootSaga from './modules/rootSaga';
+import { FichasState } from './modules/fichaCatalografica/types';
 
 export interface ApplicationState {
   users: UsersState,
   books: BooksState,
   events: EventsState,
   spaces: SpacesState,
-  login: LoginState
+  login: LoginState,
+  fichaCatalografica: FichasState,
 }
 
 const sagaMiddleware = createSagaMiddleware();

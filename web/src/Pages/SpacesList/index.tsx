@@ -39,7 +39,6 @@ function SpacesList(){
         return       <div className="book-list">
         <ListItem 
             key={space.id}
-            type="space"
             space={space}
             avatar={SpaceIcon}
             header={space.nome}

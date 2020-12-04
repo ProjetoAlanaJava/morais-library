@@ -52,9 +52,19 @@ function Navbar(){
                     <li className="menu-item">
                         <Link to="/spaces">Espaços</Link>
                     </li>
-                    <li className="menu-item">
-                        <Link to="/ficha-catalografica/solicitacao">Ficha Catalográfica</Link>
-                    </li>
+
+                    {login.data?.usuario.authority === 'aluno' && (
+                        <li className="menu-item">
+                            <Link to="/ficha-catalografica/solicitacao">Ficha Catalográfica</Link>
+                        </li>
+                    )}
+
+                    {login.data?.usuario.authority === 'funcionario' && (
+                        <li className="menu-item">
+                            <Link to="/ficha-catalografica">Ficha Catalográfica</Link>
+                        </li>
+                    )}
+
                     <li className="menu-item">
                         <Link to="/" onClick={generateReports}>Relatórios</Link>
                     </li>

@@ -5,6 +5,7 @@ import books from './books/reducer';
 import events from './events/reducer';
 import spaces from './spaces/reducer';
 import login from './login/reducer';
+import fichaCatalografica from './fichaCatalografica/reducer';
 
 export default combineReducers({
   users,
@@ -12,4 +13,5 @@ export default combineReducers({
   events,
   spaces,
   login,
+  fichaCatalografica,
 });

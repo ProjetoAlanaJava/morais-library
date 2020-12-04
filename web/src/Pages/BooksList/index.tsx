@@ -37,8 +37,7 @@ function BooksList(){
         return       <div className="book-list">
         <ListItem 
             key={book.id}
-            type="book"
-            isBook={true}
+            isEdit={false}
             book={book}
             avatar={bookIcon}
             header={book.titulo}

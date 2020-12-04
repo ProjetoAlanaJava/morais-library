@@ -19,7 +19,7 @@ import SaveForm from '../../../components/SaveForm';
 import { ApplicationState } from '../../../store';
 
 import './styles.css';
-import { FichaCatalografica } from '../../../store/modules/fichaCatalografica/types';
+import { FichasCatalograficas } from '../../../store/modules/fichaCatalografica/types';
 import api from '../../../services/api';
 import { errorRegister, successRegister } from '../../../utils/notifications';
 
@@ -36,7 +36,7 @@ function SolicitacaoFicha(){
 
     const { events, login } = useSelector( (state: ApplicationState) => state); 
 
-    const handleSubmit: SubmitHandler<FichaCatalografica> = async (data , { reset })=> {
+    const handleSubmit: SubmitHandler<FichasCatalograficas> = async (data , { reset })=> {
       
 
 

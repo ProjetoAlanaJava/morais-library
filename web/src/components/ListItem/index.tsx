@@ -16,11 +16,12 @@ import editIcon from '../../assets/images/icons/edit-white.svg';
 import { Book } from '../../store/modules/books/types';
 import { ApplicationState } from '../../store';
 
-import { successReservation, errorReservation } from '../../utils/notifications';
+import { successReservation, errorReservation, successCustom, errorCustom } from '../../utils/notifications';
 
 import api from '../../services/api';
 
 import './styles.css';
+import { FichasCatalograficas } from '../../store/modules/fichaCatalografica/types';
 
 
 interface ListItemProps {
@@ -31,24 +32,26 @@ interface ListItemProps {
     user?: User ;
     space?: Space;
     event?: Event;
-    isBook?: boolean;
     book?: Book;
+    ficha?: FichasCatalograficas;
     reserveLink?: string;
-    type: string;
     header: string;
     description_one_value: string | Date | any;
     description_one_title: string; 
     description_two_value: string;
     description_two_title: string;
-    additional_information_title: string
+    additional_information_title: string;
     additional_information_value: any;
+    fichaLink?: string;
+
+    isEdit?: boolean;
 }
 
 const ListItem: React.FC<ListItemProps> = (
     {   editLink, deleteLink, avatar, description_one_value, description_one_title, 
         description_two_value, description_two_title, additional_information_value, 
-        additional_information_title, header, type, user, space, event, reserveLink,
-        isBook, book,
+        additional_information_title, header,  user, space, event, reserveLink,
+        book, fichaLink, ficha, isEdit
     }) =>{
 
     const dispatch = useDispatch();
@@ -116,6 +119,25 @@ const ListItem: React.FC<ListItemProps> = (
         }
     }
 
+    function handleGenerateFicha(){
+        console.log('GERAR FICHA', ficha)
+        const confirmFicha = window.confirm('Você deseja realmente gerar essa ficha catalográfica?')
+
+        if(confirmFicha){
+            // console.log('RESERVE LINK')
+            // console.log(book)
+            // console.log(login)
+            
+            api.put(`ficha-catalografica/gerar-ficha/${ficha?.id}`
+            ).then(() =>{
+                successCustom('Ficha gerada com sucesso!')
+            }).catch(() => {
+                errorCustom('Erro ao gerar ficha, contate o suporte do sistema!')
+            })
+
+        }
+    }
+
     return (
         <main className="list-item">
             { avatar?
@@ -142,7 +164,7 @@ const ListItem: React.FC<ListItemProps> = (
             </article>
 
             <div className="options">
-                {!isBook && (
+                { isEdit  && (
                     <>
                         <Link to={editLink}>
                             <img src={editIcon} alt="Editar item" onClick={editItem}/>
@@ -160,6 +182,13 @@ const ListItem: React.FC<ListItemProps> = (
                         Reservar 
                     </Link>    
                 )}
+                { fichaLink && (ficha?.status !== 'gerada') &&(
+                    <Link to={fichaLink} id="reserve-link" onClick={handleGenerateFicha}>
+                        <img src={addIcon} alt="gerar ficha" />
+                        Gerar Ficha 
+                    </Link>    
+                )}
+
             </div>
         </main>
     )
