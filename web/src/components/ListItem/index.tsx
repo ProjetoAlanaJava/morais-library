@@ -164,7 +164,7 @@ const ListItem: React.FC<ListItemProps> = (
             </article>
 
             <div className="options">
-                { isEdit  && (
+                {( login.data?.usuario.authority === 'funcionario' )  && (
                     <>
                         <Link to={editLink}>
                             <img src={editIcon} alt="Editar item" onClick={editItem}/>

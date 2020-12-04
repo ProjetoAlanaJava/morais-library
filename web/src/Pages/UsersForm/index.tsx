@@ -74,11 +74,11 @@ function UserForm(){
 
           api.put(`auth/update/${id}`, {
             "matricula": data.matricula,  
-            "authority": data.authority,
+            "authority": optionsAuthority[data.authority].label,
             "nome": data.nome,
             "cpf": data.cpf,
             "ativo": true,
-            "curso": {"id": data.curso},
+            "curso": {"id": data.cursoId},
             "cargo": data.cargo,
             "limiteLivros": 10,
             "telefone": data.telefone,
@@ -95,14 +95,15 @@ function UserForm(){
 
         }else{
           console.log(data)
-
+          console.log(data.cursoId)
+          console.log(optionsAuthority[data.authority].label)
           api.post('auth/signup', {
             "matricula" : data.matricula,
             "password":  data.cpf,
             "authority" : optionsAuthority[data.authority].label,
             "nome": data.nome,
             "cpf": data.cpf,
-            "curso": {"id": data.curso},
+            "curso": {"id": data.cursoId},
             "cargo": data.cargo, 
             "telefone": data.telefone,
             "email": data.email
@@ -194,7 +195,7 @@ function UserForm(){
                     />
 
                     <Select 
-                        name="curso" 
+                        name="cursoId" 
                         label="Curso"
                         options={optionsCursos}
                     />

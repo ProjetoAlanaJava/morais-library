@@ -12,11 +12,12 @@ export interface User{
   matricula: string,
   id: number;
   nome: string;
-  cpf: string;
+  cpf: number;
   ativo: boolean;
   curso: Curso;
   authority: number
-  cargo: string
+  cargo: string,
+  cursoId: number,
   // departamento: Departamento;
   tipo: string;
   // limiteLivros: number;

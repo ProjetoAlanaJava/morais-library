@@ -65,9 +65,11 @@ function Navbar(){
                         </li>
                     )}
 
-                    <li className="menu-item">
-                        <Link to="/" onClick={generateReports}>Relatórios</Link>
-                    </li>
+                    { login.data?.usuario.authority === 'funcionario' && (
+                        <li className="menu-item">
+                            <Link to="/" onClick={generateReports}>Relatórios</Link>
+                        </li>
+                    )}
                 </ul>
             </nav>
             <div className="logout">
