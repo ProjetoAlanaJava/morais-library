@@ -2,18 +2,16 @@ import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import { Form } from '@unform/web';
-import * as Yup from 'yup';
 
 // import { Document } from '../../utils/Document';
-import {  Space } from '../../store/modules/spaces/types'
-import Input from '../../components/Input';
+// import {  Space } from '../../store/modules/spaces/types'
+// import Input from '../../components/Input';
 import PageBody from '../../components/PageBody';
 import FormBody from '../../components/FormBody';
 import SaveForm from '../../components/SaveForm';
 
 
-import { addSpace, updateSpace } from '../../store/modules/spaces/actions';
-import { errorRegister, successRegister, successUpdate } from '../../utils/notifications';
+import { errorRegister, successRegister } from '../../utils/notifications';
 import api from '../../services/api';
 
 import { ApplicationState } from '../../store';
