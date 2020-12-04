@@ -43,22 +43,22 @@ public class RelatoriosController {
         DateTimeFormatter formatarData = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         DateTimeFormatter formatarDataUSA = DateTimeFormatter.ofPattern("yyyy-dd-MM");
         LocalDate dataHoje = LocalDate.now();
-        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
-        map.put("Total usuarios cadastrados no sistema: ", usuarioService.countAllUsers());
-        map.put("Total professores cadastrados no sistema: ", usuarioService.countAllUsersByAutority("professor"));
-        map.put("Total alunos cadastrados no sistema: ", usuarioService.countAllUsersByAutority("aluno"));
-        map.put("Total usuarios externos cadastrados no sistema: ", usuarioService.countAllUsersByAutority("externo"));
-        map.put("Total funcionarios cadastrados no sistema: ", usuarioService.countAllUsersByAutority("funcionario"));
-        map.put("Total emprestimos no sistema: ", emprestimoService.countAllEmprestimos());
-        map.put("Total emprestimos no sistema na data " + formatarData.format(dataHoje), emprestimoService.countByDataDevolucao(formatarData.format(dataHoje)));
-        map.put("Total reservas de livros no sistema: ", reservaLivroService.countALl());
-        map.put("Total  reservas de livros no sistema na data " + formatarData.format(dataHoje), reservaLivroService.countALlByData(formatarData.format(dataHoje)));
-        map.put("Total reservas de espacos no sistema: ", reservaEspacoService.countALl());
-        map.put("Total  reservas de espacos no sistema na data " + formatarData.format(dataHoje), reservaEspacoService.countByData(formatarDataUSA.format(dataHoje)));
-        map.put("Total  eventos no sistema: ", eventoService.countAll());
-        map.put("Total  eventos no sistema na data " + formatarData.format(dataHoje), eventoService.countByData(formatarDataUSA.format(dataHoje)));
-        map.put("Total  eventos no sistema com status cancelado ", eventoService.countByStatus("cancelado"));
+        map.put("totalUsuarios", "Total usuarios cadastrados no sistema: " + usuarioService.countAllUsers());
+        map.put("totalProfessores", "Total professores cadastrados no sistema: " + usuarioService.countAllUsersByAutority("professor"));
+        map.put("totalAlunos", "Total alunos cadastrados no sistema: "+ usuarioService.countAllUsersByAutority("aluno"));
+        map.put("totalExternos", "Total usuarios externos cadastrados no sistema: " + usuarioService.countAllUsersByAutority("externo"));
+        map.put("totalFuncionarios", "Total funcionarios cadastrados no sistema: "+ usuarioService.countAllUsersByAutority("funcionario"));
+        map.put("totalEmprestimos", "Total emprestimos no sistema: "+ emprestimoService.countAllEmprestimos());
+        map.put("totalEmprestimosData", "Total emprestimos no sistema na data " + formatarData.format(dataHoje) +emprestimoService.countByDataDevolucao(formatarData.format(dataHoje)));
+        map.put("totalReservaLivros", "Total reservas de livros no sistema: "+ reservaLivroService.countALl());
+        map.put("totalReservaLivrosData", "Total  reservas de livros no sistema na data " + formatarData.format(dataHoje) +reservaLivroService.countALlByData(formatarData.format(dataHoje)));
+        map.put("totalReservaEspaco", "Total reservas de espacos no sistema: " + reservaEspacoService.countALl());
+        map.put("totalReservaEspacoData", "Total  reservas de espacos no sistema na data " + formatarData.format(dataHoje) + reservaEspacoService.countByData(formatarDataUSA.format(dataHoje)));
+        map.put("totalEventos", "Total  eventos no sistema: "+ eventoService.countAll());
+        map.put("totalEventosData", "Total  eventos no sistema na data " + formatarData.format(dataHoje)+ eventoService.countByData(formatarDataUSA.format(dataHoje)));
+        map.put("totalEventosCancelado", "Total  eventos no sistema com status cancelado " + eventoService.countByStatus("cancelado"));
 
         return ResponseEntity.ok().body(map);
     }
