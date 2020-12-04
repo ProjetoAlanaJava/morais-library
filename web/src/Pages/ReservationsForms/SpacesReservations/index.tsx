@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -16,7 +16,7 @@ import SaveForm from '../../../components/SaveForm';
 import { errorRegister, successRegister } from '../../../utils/notifications';
 import api from '../../../services/api';
 
-// import { ApplicationState } from '../../../store';
+import { ApplicationState } from '../../../store';
 
 import './styles.css';
 
@@ -30,7 +30,7 @@ function SpacesReservationsForm(){
     // const dispatch = useDispatch();
     const formRef = useRef<FormHandles>(null);
 
-    // const { spaces } = useSelector( (state: ApplicationState) => state); 
+    const { login } = useSelector( (state: ApplicationState) => state); 
 
     const handleSubmit: SubmitHandler<SpaceReservation> = async (data , { reset })=> {
 
@@ -49,9 +49,10 @@ function SpacesReservationsForm(){
 
 
         console.log(data)
+        console.log("ID - USUARIO", login.data?.usuario.id)
 
         api.post('reserva-espaco', {
-          "usuario": { "id": 1},
+          "usuario": { "id": login.data?.usuario.id},
           "date": data.data,
           "espaco": { "id": 2},
           "evento": null,
