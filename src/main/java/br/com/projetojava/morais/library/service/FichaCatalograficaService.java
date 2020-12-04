@@ -5,6 +5,7 @@ import br.com.projetojava.morais.library.repository.FichaCatalograficaRepository
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,6 +15,10 @@ public class FichaCatalograficaService {
 
     public FichaCatalograficaService(FichaCatalograficaRepository fichaCatalograficaRepository) {
         repository = fichaCatalograficaRepository;
+    }
+
+    public List<FichaCatalografica> findAll() {
+        return repository.findAll();
     }
 
     public FichaCatalografica save(FichaCatalografica ficha) {

@@ -30,12 +30,10 @@ public class RelatoriosController {
         eventoService = eventoServico;
     }
 
-
     /**
      * Método que retornar relatorios do sistema de acordo com o dia atual em que o relatório é solicitado
      * @return 200 - Json no body com informaçoes.
      */
-
     @GetMapping
     @ResponseBody
     public ResponseEntity<Object> gerarRelatorios() {
@@ -44,6 +42,10 @@ public class RelatoriosController {
         DateTimeFormatter formatarDataUSA = DateTimeFormatter.ofPattern("yyyy-dd-MM");
         LocalDate dataHoje = LocalDate.now();
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        String emprestimosComData = "Total emprestimos no sistema na data " + formatarData.format(dataHoje) + ": ";
+        String reservaLivrosComData = "Total  reservas de livros no sistema na data " + formatarData.format(dataHoje) + ": ";
+        String reservaEspacosComData = "Total  reservas de espacos no sistema na data " + formatarData.format(dataHoje) + ": ";
+        String eventosComData = "Total  eventos no sistema na data " + formatarData.format(dataHoje) + ": ";
 
         map.put("totalUsuarios", "Total usuarios cadastrados no sistema: " + usuarioService.countAllUsers());
         map.put("totalProfessores", "Total professores cadastrados no sistema: " + usuarioService.countAllUsersByAutority("professor"));
@@ -51,14 +53,14 @@ public class RelatoriosController {
         map.put("totalExternos", "Total usuarios externos cadastrados no sistema: " + usuarioService.countAllUsersByAutority("externo"));
         map.put("totalFuncionarios", "Total funcionarios cadastrados no sistema: "+ usuarioService.countAllUsersByAutority("funcionario"));
         map.put("totalEmprestimos", "Total emprestimos no sistema: "+ emprestimoService.countAllEmprestimos());
-        map.put("totalEmprestimosData", "Total emprestimos no sistema na data " + formatarData.format(dataHoje) +emprestimoService.countByDataDevolucao(formatarData.format(dataHoje)));
+        map.put("totalEmprestimosData",  emprestimosComData + emprestimoService.countByDataDevolucao(formatarData.format(dataHoje)));
         map.put("totalReservaLivros", "Total reservas de livros no sistema: "+ reservaLivroService.countALl());
-        map.put("totalReservaLivrosData", "Total  reservas de livros no sistema na data " + formatarData.format(dataHoje) +reservaLivroService.countALlByData(formatarData.format(dataHoje)));
+        map.put("totalReservaLivrosData", reservaLivrosComData + reservaLivroService.countALlByData(formatarData.format(dataHoje)));
         map.put("totalReservaEspaco", "Total reservas de espacos no sistema: " + reservaEspacoService.countALl());
-        map.put("totalReservaEspacoData", "Total  reservas de espacos no sistema na data " + formatarData.format(dataHoje) + reservaEspacoService.countByData(formatarDataUSA.format(dataHoje)));
+        map.put("totalReservaEspacoData", reservaEspacosComData + reservaEspacoService.countByData(formatarDataUSA.format(dataHoje)));
         map.put("totalEventos", "Total  eventos no sistema: "+ eventoService.countAll());
-        map.put("totalEventosData", "Total  eventos no sistema na data " + formatarData.format(dataHoje)+ eventoService.countByData(formatarDataUSA.format(dataHoje)));
-        map.put("totalEventosCancelado", "Total  eventos no sistema com status cancelado " + eventoService.countByStatus("cancelado"));
+        map.put("totalEventosData", eventosComData + eventoService.countByData(formatarDataUSA.format(dataHoje)));
+        map.put("totalEventosCancelado", "Total  eventos no sistema com status cancelado: " + eventoService.countByStatus("cancelado"));
 
         return ResponseEntity.ok().body(map);
     }

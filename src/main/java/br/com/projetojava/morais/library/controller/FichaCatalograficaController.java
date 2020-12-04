@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -18,6 +19,16 @@ public class FichaCatalograficaController {
 
     public FichaCatalograficaController(FichaCatalograficaService fichaCatalograficaService) {
         service = fichaCatalograficaService;
+    }
+
+    /**
+     * Metodo para ser usudo no funcionario para achar todas as fichas catalograficas
+        @param
+        @return Todas as fichas catalograficas no sistema
+     */
+    @GetMapping
+    public List<FichaCatalografica> acharTodas() {
+        return service.findAll();
     }
 
     /**
