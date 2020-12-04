@@ -7,6 +7,7 @@ export interface UsersApplicationState{
 
 const INITIAL_STATE: BooksState = {
   data: [],
+  dataReservations: [],
   isEdit: false,
   loading: false,
   error: false
@@ -24,6 +25,18 @@ const reducer: Reducer<BooksState> = (state = INITIAL_STATE, action) : BooksStat
     case BooksTypes.LOAD_BOOKS:
       console.log('REDUCER - LOAD_BOOKS')
       return { ...state,  data: action.payload.data, loading: false, error: false,  isEdit: false};
+
+    case BooksTypes.ADD_BOOK_RESERVATIONS:
+      console.log('REDUCER - ADD_BOOK_RESERVATIONS', action.payload.data)
+      return { ...state};
+
+    case BooksTypes.LOAD_BOOKS_RESERVATIONS_REQUEST:
+      console.log('REDUCER - LOAD_BOOKS_RESERVATIONS_REQUEST')
+      return {...state, loading: true, isEdit: false}
+
+    case BooksTypes.LOAD_BOOKS_RESERVATIONS:
+      console.log('REDUCER - LOAD_BOOKS_RESERVATIONS')
+      return { ...state,  dataReservations: action.payload.data, loading: false, error: false,  isEdit: false};
 
     default:
       return state

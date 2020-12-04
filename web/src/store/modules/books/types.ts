@@ -5,6 +5,15 @@ export enum BooksTypes {
   LOAD_BOOKS_REQUEST = 'BOOK/LOAD_BOOKS_REQUEST',
   UPDATE_BOOK = 'BOOK/UPDATE_BOOK',
   DELETE_BOOK = 'BOOK/DELETE_BOOK',
+  ADD_BOOK_RESERVATIONS = 'BOOK/ADD_BOOK_RESERVATIONS',
+  LOAD_BOOKS_RESERVATIONS = 'BOOK/LOAD_BOOKS_RESERVATIONS',
+  LOAD_BOOKS_RESERVATIONS_REQUEST = 'BOOK/LOAD_BOOKS__RESERVATIONS_REQUEST',
+}
+
+export interface BookReservation{
+  "id": number,
+  "livro": Book;
+  "dataMaximaEmprestimo": string;
 }
 
 export interface Book {
@@ -50,6 +59,7 @@ export interface Tipo {
 
 export interface BooksState {
   readonly data: Book[];
+  readonly dataReservations: BookReservation[];
   readonly isEdit: boolean;
   // readonly formData: Book | undefined;
   readonly loading: boolean;
