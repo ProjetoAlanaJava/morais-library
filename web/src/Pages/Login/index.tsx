@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import { Form } from '@unform/web';
 import { useHistory } from 'react-router-dom';
@@ -7,15 +8,15 @@ import * as Yup from 'yup';
 import Input from '../../components/Input';
 import SaveForm from '../../components/SaveForm';
 
-// import api from '../../services/api';
-// import { login } from '../../services/auth';
-// import { errorLogin } from '../../utils/Notifications';
+import { User } from '../../store/modules/login/types';
+import { setUser } from '../../store/modules/login/actions';
 
 import { login } from '../../services/auth';
+import { errorLogin } from '../../utils/notifications';
+
+import api from '../../services/api';
 
 import './styles.css';
-// import { User } from '../../store/modules/login/types';
-// import { setUser } from '../../store/modules/login/actions';
 
 
 interface LoginData {
@@ -25,6 +26,7 @@ interface LoginData {
 
 function Login() {
 
+  const dispatch = useDispatch()
   const history = useHistory();
   const formRef = useRef<FormHandles>(null);
 
@@ -42,7 +44,25 @@ function Login() {
         abortEarly: false,
       })
 
-      login("TOKEN_PROVISORIO");
+      // login("TOKEN_PROVISORIO");
+
+      api.post('/auth/signin', data).then((response) =>{    
+        const userData: User = response.data;
+        
+        console.log(userData)
+
+        if(userData.token){
+          login(userData.token);
+          dispatch(setUser(userData));
+
+          history.push('/books');
+        }
+
+      }).catch((err) => {
+        console.log(err)
+        errorLogin()
+      })
+
        
       history.push('/books');
 

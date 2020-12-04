@@ -11,6 +11,7 @@ import UserForm from './Pages/UsersForm';
 import SpacesForm from './Pages/SpacesForm';
 import EventsForm from './Pages/EventsForm';
 import SpacesReservationsForm from './Pages/ReservationsForms/SpacesReservations';
+import BooksReservationsList from './Pages/BooksReservationsList';
 
 import { isAuthenticated } from './services/auth';
 
@@ -25,6 +26,7 @@ function Routes(){
       <Route path="/" exact component={Home}/>
       <Route path="/login" component={Login}/>
       <PrivateRoute path="/books" exact component={ BooksList}/>
+      <PrivateRoute path="/books/my-reservations" exact component={ BooksReservationsList}/>
       <PrivateRoute  path="/users" exact component={ UsersList }/>
       <PrivateRoute  path="/users/form" exact component={ UserForm}/>
       <PrivateRoute  path="/events" exact component={ EventList }/>

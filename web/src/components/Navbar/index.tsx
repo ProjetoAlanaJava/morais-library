@@ -1,19 +1,31 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
+import { ApplicationState } from '../../store';
+import { logout } from '../../services/auth';
+
+import createRelatorios from '../../utils/Relatorios';
 
 import logoutIcon from '../../assets/images/icons/logout.svg';
 import logoExtendIcon from '../../assets/images/icons/logo-extend.svg';
 
 import './styles.css';
-import { logout } from '../../services/auth';
+
 
 function Navbar(){
+
+    
+    const { login } = useSelector( (state: ApplicationState) => state);
 
     const handleLogout = () => {
       console.log('LOGOUT');
       logout()
+    }
+
+    const generateReports = ()=> {
+        createRelatorios()
     }
 
     return (
@@ -36,12 +48,12 @@ function Navbar(){
                         <Link to="/spaces">Espaços</Link>
                     </li>
                     <li className="menu-item">
-                        <Link to="/settings">Configurações</Link>
+                        <Link to="/" onClick={generateReports}>Relatórios</Link>
                     </li>
                 </ul>
             </nav>
             <div className="logout">
-                <span>Olá, User</span>
+                <span>Olá, {login.data?.usuario.nome}</span>
                 <Link to="#">
                     <img src={logoutIcon} alt="logout" onClick={handleLogout}/>
                 </Link>

@@ -7,47 +7,43 @@ import ListItem from '../../components/ListItem';
 import bookIcon from '../../assets/images/book.png';
 
 import { ApplicationState } from '../../store';
-import { loadBooksRequest } from '../../store/modules/books/actions';
-import { Book } from '../../store/modules/books/types';
+import { loadBooksReservationsRequest } from '../../store/modules/books/actions';
+import { BookReservation } from '../../store/modules/books/types';
 
 import './styles.css';
 
-function BooksList(){
+function BooksReservationsList(){
 
   const dispatch = useDispatch()
 
   const { books } = useSelector( (state: ApplicationState) => state);
 
   useEffect(() => {
-    dispatch(loadBooksRequest())
+    dispatch(loadBooksReservationsRequest())
   }, [dispatch]);
   
 
   return (
     <PageBody 
-      title="Livros - Lista"
-      link="/livros/form"
-      isBook={true}
-      reserveLink="/books/reservations/form"
-      reservationTitle="Nova reserva"
-      myReservationsLink="books/my-reservations"
+      title="Minhas Reservas - Livros"
+      link="/books"
+      isForm={true}
     >
             
-      { books.data.map( (book: Book) => {
-        return       <div className="book-list">
+      { books.dataReservations.map( (book: BookReservation) => {
+        return <div className="book-list">
         <ListItem 
             key={book.id}
             type="book"
             isBook={true}
-            book={book}
             avatar={bookIcon}
-            header={book.titulo}
+            header={book.livro.titulo}
             description_one_title="Editora"
-            description_one_value={book.editora.nome}
+            description_one_value={book.livro.editora.nome}
             description_two_title="ISBN"
-            description_two_value={book.isbn}
+            description_two_value={book.livro.isbn}
             additional_information_title="Quantidade"
-            additional_information_value={book.qtd_geral}
+            additional_information_value={book.livro.qtd_geral}
             editLink="/users/form"
             deleteLink="/users"
             reserveLink='books'
@@ -60,4 +56,4 @@ function BooksList(){
   )
 }
 
-export default BooksList;
+export default BooksReservationsList;
