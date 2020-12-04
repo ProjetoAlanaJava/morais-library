@@ -176,7 +176,7 @@ const ListItem: React.FC<ListItemProps> = (
                     </>
                 )}
 
-                { reserveLink && (
+                { reserveLink && login.data?.usuario.authority !== 'funcionario' && (
                     <Link to={reserveLink} id="reserve-link" onClick={reserveItem}>
                         <img src={addIcon} alt="Nova reserva" />
                         Reservar 

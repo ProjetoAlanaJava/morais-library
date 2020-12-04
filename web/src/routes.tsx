@@ -15,6 +15,7 @@ import BooksReservationsList from './Pages/BooksReservationsList';
 import SolicitacaoFicha from './Pages/FichaCatalografica/SolicitacaoFicha';
 import UploadsForm from './Pages/uploadForm';
 import FichaList from './Pages/FichaCatalografica/FichaList';
+import LoanForm from './Pages/LoanForm';
 
 import { isAuthenticated } from './services/auth';
 
@@ -40,6 +41,7 @@ function Routes(){
       <PrivateRoute  path="/spaces/reservation/form" exact component={ SpacesReservationsForm}/>
       <PrivateRoute  path="/ficha-catalografica" exact component={ FichaList}/>
       <PrivateRoute  path="/ficha-catalografica/solicitacao" exact component={ SolicitacaoFicha}/>
+      <PrivateRoute  path="/loans/form" exact component={ LoanForm}/>
       <Route  path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   )
