@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { User } from '../../store/modules/users/types';
@@ -13,8 +13,12 @@ import addIcon from '../../assets/images/icons/add-white.svg';
 import deleteIcon from '../../assets/images/icons/delete-white.svg';
 import editIcon from '../../assets/images/icons/edit-white.svg';
 
-import api from '../../services/api';
+import { Book } from '../../store/modules/books/types';
+import { ApplicationState } from '../../store';
 
+import { successReservation, errorReservation } from '../../utils/notifications';
+
+import api from '../../services/api';
 
 import './styles.css';
 
@@ -28,6 +32,7 @@ interface ListItemProps {
     space?: Space;
     event?: Event;
     isBook?: boolean;
+    book?: Book;
     reserveLink?: string;
     type: string;
     header: string;
@@ -43,10 +48,11 @@ const ListItem: React.FC<ListItemProps> = (
     {   editLink, deleteLink, avatar, description_one_value, description_one_title, 
         description_two_value, description_two_title, additional_information_value, 
         additional_information_title, header, type, user, space, event, reserveLink,
-        isBook
+        isBook, book,
     }) =>{
 
     const dispatch = useDispatch();
+    const { login } = useSelector( (state: ApplicationState) => state);
 
     function editItem(){
 
@@ -89,7 +95,25 @@ const ListItem: React.FC<ListItemProps> = (
     }
 
     function reserveItem(){
-        console.log('RESERVE LINK')
+        const confirmDelete = window.confirm('Você deseja realmente reservar esse livro?')
+
+        if(confirmDelete){
+            // console.log('RESERVE LINK')
+            // console.log(book)
+            // console.log(login)
+            
+        api.post('reserva-livro', {
+                "livro": {"id": book?.id},
+                "usuario" : {"id": login.data?.usuario.id}
+            }
+          ).then(() =>{
+            successReservation()
+            // dispatch(addEvent(data))
+          }).catch(() => {
+            errorReservation()
+          })
+
+        }
     }
 
     return (
