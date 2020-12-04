@@ -38,14 +38,22 @@ function Navbar(){
                     <li className="menu-item">
                         <Link to="/books">Livros</Link>
                     </li>
-                    <li className="menu-item">
-                        <Link to="/users">Usuários</Link>
-                    </li>
-                    <li className="menu-item">
-                        <Link to="/events">Eventos</Link>
-                    </li>
+                    {login.data?.usuario.authority === 'funcionario' && (
+                        <li className="menu-item">
+                            <Link to="/users">Usuários</Link>
+                        </li>
+                    )}
+                    {login.data?.usuario.authority === 'funcionario' && (
+                        <li className="menu-item">
+                            <Link to="/events">Eventos</Link>
+                        </li>
+                    )}
+
                     <li className="menu-item">
                         <Link to="/spaces">Espaços</Link>
+                    </li>
+                    <li className="menu-item">
+                        <Link to="/ficha-catalografica/solicitacao">Ficha Catalográfica</Link>
                     </li>
                     <li className="menu-item">
                         <Link to="/" onClick={generateReports}>Relatórios</Link>

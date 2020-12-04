@@ -30,6 +30,8 @@ function UsersList(){
       title="Usuários - Lista"
       link="/users/form"
       isForm={false}
+      uploadLink="/users/uploads"
+      uploadTitle="Dados do arquivo"
     >
       
       { console.log(users)}
@@ -42,7 +44,7 @@ function UsersList(){
             avatar={avatar}
             header={user.nome}
             description_one_title="Curso"
-            description_one_value={user.curso.nome}
+            description_one_value={user.curso ? user.curso.nome : 'Não cadastrado'}
             description_two_title="Email"
             description_two_value={user.email}
             additional_information_title="Telefone"
