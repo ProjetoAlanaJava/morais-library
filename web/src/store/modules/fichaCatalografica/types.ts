@@ -1,38 +1,39 @@
-export enum FichaCatalograficaTypes {
-  ADD_FICHA_CATALOGRAFICA = 'FICHA_CATALOGRAFICA/ADD_FICHA_CATALOGRAFICA',
-  SHOW_FICHA_CATALOGRAFICA = 'FICHA_CATALOGRAFICA/SHOW_FICHA_CATALOGRAFICA',
-  LOAD_FICHA_CATALOGRAFICAS = 'FICHA_CATALOGRAFICA/LOAD_FICHA_CATALOGRAFICAS',
-  LOAD_FICHA_CATALOGRAFICAS_REQUEST = 'FICHA_CATALOGRAFICA/LOAD_FICHA_CATALOGRAFICAS_REQUEST',
-  UPDATE_FICHA_CATALOGRAFICA = 'FICHA_CATALOGRAFICA/UPDATE_FICHA_CATALOGRAFICA',
-  DELETE_FICHA_CATALOGRAFICA = 'FICHA_CATALOGRAFICA/DELETE_FICHA_CATALOGRAFICA',
+export enum FichasTypes {
+  ADD_FICHA = 'FICHA/ADD_FICHA',
+  SHOW_FICHA = 'FICHA/SHOW_FICHA',
+  LOAD_FICHAS = 'FICHA/LOAD_FICHAS',
+  LOAD_FICHAS_REQUEST = 'FICHA/LOAD_FICHAS_REQUEST',
+  UPDATE_FICHA = 'FICHA/UPDATE_FICHA',
+  DELETE_FICHA = 'FICHA/DELETE_FICHA',
 }
 
 export interface Autor {
-  id: number
+  id:number
 }
-
 export interface Editora {
-  id: number
+  id:number
 }
 
-export interface FichaCatalografica {
-		titulo : string,
-		subtitulo : string,
-		autor: Autor,
-		assuntos: string,
-		isbn : number,
-		editora: Editora,
-		localPublicacao : string,
-		dataPublicacao : string,
-		numPaginas : number,
-    idEditora: number,
+export interface FichasCatalograficas {
+  id:number,
+  titulo : string,
+  subtitulo : string,
+  autor: Autor,
+  assuntos: string,
+  isbn : number,
+  editora: Editora,
+  localPublicacao : string,
+  dataPublicacao : string,
+  numPaginas : number,
+  idEditora: number,
+  status: string,
 }
 
 
-export interface FichaCatalograficaState {
-  readonly data: FichaCatalografica[];
+export interface FichasState {
+  readonly data: FichasCatalograficas[];
   readonly isEdit: boolean;
-  readonly formData: FichaCatalografica | undefined;
+  readonly formData: FichasCatalograficas | undefined;
   readonly loading: boolean;
   readonly error: boolean;
 }
