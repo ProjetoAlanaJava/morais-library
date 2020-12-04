@@ -12,6 +12,8 @@ import SpacesForm from './Pages/SpacesForm';
 import EventsForm from './Pages/EventsForm';
 import SpacesReservationsForm from './Pages/ReservationsForms/SpacesReservations';
 import BooksReservationsList from './Pages/BooksReservationsList';
+import SolicitacaoFicha from './Pages/FichaCatalografica/SolicitacaoFicha';
+import UploadsForm from './Pages/uploadForm';
 
 import { isAuthenticated } from './services/auth';
 
@@ -28,12 +30,14 @@ function Routes(){
       <PrivateRoute path="/books" exact component={ BooksList}/>
       <PrivateRoute path="/books/my-reservations" exact component={ BooksReservationsList}/>
       <PrivateRoute  path="/users" exact component={ UsersList }/>
+      <PrivateRoute  path="/users/uploads" exact component={ UploadsForm }/>
       <PrivateRoute  path="/users/form" exact component={ UserForm}/>
       <PrivateRoute  path="/events" exact component={ EventList }/>
       <PrivateRoute  path="/events/form" exact component={ EventsForm }/>
       <PrivateRoute  path="/spaces" exact component={ SpacesList }/>
       <PrivateRoute  path="/spaces/form" exact component={ SpacesForm}/>
       <PrivateRoute  path="/spaces/reservation/form" exact component={ SpacesReservationsForm}/>
+      <PrivateRoute  path="/ficha-catalografica/solicitacao" exact component={ SolicitacaoFicha}/>
       <Route  path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   )
